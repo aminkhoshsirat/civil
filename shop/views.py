@@ -1,3 +1,4 @@
+from decimal import Decimal
 from itertools import product
 
 from django.http import Http404
@@ -6,6 +7,7 @@ from django.views.decorators.http import require_POST
 
 from .models import Product
 from django.shortcuts import get_object_or_404, redirect, reverse
+from .cart import Cart
 
 # Create your views here.
 def index(request):
@@ -16,7 +18,6 @@ def detail(request, id:int, title:str):
     product = get_object_or_404(Product,id=id)
     context = {'product' : product}
     return render(request,"detail.html", context)
-
 
 def store(request):
     category = request.GET.get('category')
@@ -33,25 +34,34 @@ def checkout(request):
 def add_to_cart(request):
     product_id = request.POST.get("product_id")
     quantity = request.POST.get("quantity")
-
+    update = True if request.POST.get("update") == "1" else False
     product = get_object_or_404(Product, id=product_id)
-    cart = request.session.get('cart')
-    if not cart:
-        cart = request.session['cart'] = {}
 
-    cart[product_id]={
-        'quantity' : int(quantity),
-        'price' : str(product.price)
-    }
-    request.session.modified = True
+    cart = Cart(request)
+    cart.add(product_id, str(product.price), int(quantity), update)
+
     return redirect(reverse('shop:cart_detail'))
 
+
 def cart_detail(request):
-    cart = request.session.get('cart')
-    if cart:
-        product_ids = cart.keys()
-        products = Product.objects.filter(id__in=product_ids)
+    cart = Cart(request)
+
+    if cart.product_ids:  # Check if there are any product IDs
+        products = Product.objects.filter(id__in=cart.product_ids)
+
+        # Add product details to each cart item
         for product in products:
             cart[str(product.id)]['product'] = product
-        return render(request, "cart_detail.html", {'cart': cart})
-    return render(request,"cart_detail.html")
+            cart[str(product.id)]['total_price'] = Decimal(cart[str(product.id)]['price']) * cart[str(product.id)]['quantity']
+
+    return render(request, "cart_detail.html", {'cart': cart})
+
+
+
+def remove_from_cart(request, product_id):
+    if Product.objects.filter(id=product_id).exists():
+        cart = Cart(request)
+        cart.remove(str(product_id))
+        return redirect(reverse('shop:cart_detail'))
+
+    raise Http404('product does not exists.')
