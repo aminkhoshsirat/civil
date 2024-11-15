@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Index{% endblock title %}
+{% block content %}
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<!-- homePage -->
+					<div class="col-md-4 col-xs-6">
+						<div class="shop">
+							<div class="shop-img">
+								<img src=" {% static './img/SteelStructure01.png' %}" alt="">
+							</div>
+							<div class="shop-body">
+								<h3>Steel<br>Structures<br>Collection</h3>
+								<a href="{% url 'homePage:store' %}?category=Steel Structures" class="cta-btn">More... <i class="fa fa-arrow-circle-right"></i></a>
+							</div>
+						</div>
+					</div>
+					<!-- /homePage -->
+
+					<!-- homePage -->
+					<div class="col-md-4 col-xs-6">
+						<div class="shop">
+							<div class="shop-img">
+								<img src=" {% static './img/ConcreteStructure.png' %}" alt="">
+							</div>
+							<div class="shop-body">
+								<h3>Concrete Structures<br>Collection</h3>
+								<a href="{% url 'homePage:store' %}?category=Concrete Structures" class="cta-btn">More... <i class="fa fa-arrow-circle-right"></i></a>
+							</div>
+						</div>
+					</div>
+					<!-- /homePage -->
+
+					<!-- homePage -->
+					<div class="col-md-4 col-xs-6">
+						<div class="shop">
+							<div class="shop-img">
+								<img src=" {% static './img/SteelGableFrame.png' %}" alt="">
+							</div>
+							<div class="shop-body">
+								<h3>Industrial Structures<br>Collection</h3>
+								<a href="{% url 'homePage:store' %}?category=Industrial Structures" class="cta-btn">More... <i class="fa fa-arrow-circle-right"></i></a>
+							</div>
+						</div>
+					</div>
+					<!-- /homePage -->
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+
+					<!-- section title -->
+					<div class="col-md-12" dir="rtl">
+						<div class="section-title" style="display: flex; justify-content: space-between; align-items: center;">
+							<h3 class="title">پروژه ها</h3>
+							<div class="section-nav" dir="rtl">
+								<ul class="section-tab-nav tab-nav" style="margin: 0; padding: 0; list-style: none;">
+									<li class="active"><a data-toggle="tab" href="#tab1">سازه های بتن آرمه</a></li>
+									<li><a data-toggle="tab" href="#tab1">سازه های فولادی</a></li>
+									<li><a data-toggle="tab" href="#tab1">سازه های صنعتی</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- /section title -->
+
+					<!-- Products tab & slick -->
+					<div class="col-md-12">
+						<div class="row">
+							<div class="products-tabs">
+								<!-- tab -->
+								<div id="tab1" class="tab-pane active">
+									<div class="products-slick" data-nav="#slick-nav-1">
+										{% for product in products %}
+											<!-- product -->
+											<div class="product">
+												<div class="product-img">
+													<img src=" {{product.image.url}}" alt="">
+												</div>
+												<div class="product-body">
+													<p class="product-category">{{ product.category }}</p>
+													<h3 class="product-name"><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></h3>
+												</div>
+											</div>
+											<!-- /product -->
+										{% endfor %}
+									</div>
+									<div id="slick-nav-1" class="products-slick-nav"></div>
+								</div>
+								<!-- /tab -->
+							</div>
+						</div>
+					</div>
+					<!-- Products tab & slick -->
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+
+		<!-- Cooperation in the Design of the Structure -->
+		<div id="hot-deal" class="section" style="background-color: #f4f4f4; padding: 20px 0;">
+
+			<div class="container" dir="rtl">
+				<div class="row justify-content-center">
+					<div class="col-md-12">
+						<h3 class="title text-right" style="margin-bottom: 20px;">همکاری در طرح</h3>
+						<div class="section-nav" dir="rtl" style="text-align: justify;">
+							<p style="line-height: 1.8; font-size: 18px;">
+								در بخش همکاری در طراحی سازه، ما با ارائه خدمات مشاوره و همکاری نزدیک با تیم‌های مهندسی و معماری،
+								به بهینه‌سازی طرح‌های سازه‌ای کمک می‌کنیم. هدف ما ایجاد سازه‌هایی ایمن، اقتصادی و پایدار است
+								که مطابق با استانداردهای روز و نیازهای پروژه باشند. ما با بهره‌گیری از دانش فنی و تجربه‌ عملی،
+								به تیم‌های پروژه کمک می‌کنیم تا راهکارهای مناسب و عملیاتی را برای مسائل سازه‌ای خود پیدا کنند.
+								همکاری ما در تمامی مراحل طراحی و محاسبات سازه‌ای از ابتدا تا پایان پروژه ادامه دارد.
+								برای همکاری در طراحی سازه تماس بگیرید.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="container">
+					<!-- Products Tab & Slick -->
+				<div class="row">
+					<div class="col-md-12">
+						<div class="products-tabs">
+							<!-- Tab -->
+							<div id="tab2" class="tab-pane active">
+								<div class="products-slick" data-nav="#slick-nav-3">
+									{% for product in products %}
+										<!-- Product -->
+										<div class="product">
+											<div class="product-img">
+												<img src="{{ product.image.url }}" alt="{{ product.title }}">
+											</div>
+											<div class="product-body">
+												<p class="product-category">{{ product.category }}</p>
+												<h3 class="product-name">
+													<a href="{{ product.get_absolute_url }}">{{ product.title }}</a>
+												</h3>
+											</div>
+										</div>
+										<!-- /Product -->
+									{% endfor %}
+								</div>
+								<div id="slick-nav-3" class="products-slick-nav"></div>
+							</div>
+							<!-- /Tab -->
+						</div>
+					</div>
+				</div>
+				<!-- /Products Tab & Slick -->
+
+			</div>
+
+		</div>
+		<!-- /Cooperation in the Design of the Structure -->
+
+		<!-- Mentoring -->
+		<div class="container" dir="rtl">
+			<div class="row justify-content-center">
+				<div class="col-md-12">
+					<h3 class="title text-right" style="margin-bottom: 20px;">منتورینگ در طراحی سازه</h3>
+					<div class="section-nav" dir="rtl" style="text-align: justify;">
+						<p style="line-height: 1.8; font-size: 18px;">
+							در خدمات منتورینگ طراحی سازه، هدف ما توانمندسازی مهندسان و دانشجویان در یادگیری اصول طراحی و تحلیل سازه‌هاست.
+							با ارائه راهنمایی‌های عملی و پاسخ به سؤالات تخصصی، شما را در مسیر حرفه‌ای‌تان همراهی می‌کنیم. این خدمات شامل آموزش
+							نرم‌افزارهای تخصصی، بررسی پروژه‌ها، و بهبود مهارت‌های فنی شما می‌باشد. ما با تجربه‌ای گسترده، تلاش می‌کنیم تا شما را در رسیدن
+							به اهداف حرفه‌ای‌تان یاری کنیم. برای دریافت مشاوره یا شرکت در جلسات آموزشی با ما تماس بگیرید.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /Mentoring -->
+
+{% endblock content %}
