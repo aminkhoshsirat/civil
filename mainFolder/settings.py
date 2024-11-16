@@ -131,14 +131,4 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
-
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-
-ZARINPAL_REQUEST = 'https://sandbox.zarinpal.com/pg/rest/WebGate/PaymentRequest.json'
-ZARINPAL_VERIFY = 'https://sandbox.zarinpal.com/pg/rest/WebGate/PaymentVerification.json'
-ZARINPAL_STARTPAY = 'https://sandbox.zarinpal.com/pg/StartPay/'
-ZARINPAL_MERCHANT_ID = '111222333444555666777888999111222333'
-ZARINPAL_CALLBACK_URL = 'http://127.0.0.1:8000/shop/verify/'

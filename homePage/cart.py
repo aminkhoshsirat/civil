@@ -14,7 +14,7 @@ class Cart:
         self.cart_length = 0
 
     @property
-    def product_ids(self):
+    def project_ids(self):
         # return list(self.cart.keys())
         return self.cart.keys()
 
@@ -33,24 +33,24 @@ class Cart:
         """Calculate the total number of items in the cart."""
         self.cart_length = sum(item['quantity'] for item in self.cart.values())
 
-    def add(self, product_id, product_price, quantity, update):
-        if product_id not in self.cart:
-            self.cart[product_id] = {
-                'product_id':product_id,
+    def add(self, project_id, project_price, quantity, update):
+        if project_id not in self.cart:
+            self.cart[project_id] = {
+                'project_id':project_id,
                 'quantity': 0,
-                'price': product_price
+                'price': project_price
             }
 
         if update:
-            self.cart[product_id]['quantity'] = quantity
+            self.cart[project_id]['quantity'] = quantity
         else:
-            self.cart[product_id]['quantity'] += quantity
+            self.cart[project_id]['quantity'] += quantity
 
         self.__save()
 
-    def remove(self, product_id):
-        if product_id in self.cart:
-            del self.cart[product_id]
+    def remove(self, project_id):
+        if project_id in self.cart:
+            del self.cart[project_id]
             self.__save()
 
     def __save(self):

@@ -1,5 +1,5 @@
 from .cart import Cart
-from .models import Product
+from .models import Project
 from decimal import Decimal
 
 def cart(request):
@@ -8,12 +8,12 @@ def cart(request):
     cart_session.update_cart_length()
     all_total_price = 0
 
-    if cart_session.product_ids:
-        products = Product.objects.filter(id__in=cart_session.product_ids)
+    if cart_session.project_ids:
+        projects = Project.objects.filter(id__in=cart_session.project_ids)
 
-        for product in products:
-            cart_session[str(product.id)]['product'] = product
-            cart_session[str(product.id)]['total_price'] = Decimal(cart_session[str(product.id)]['price']) * cart_session[str(product.id)]['quantity']
+        for project in projects:
+            cart_session[str(project.id)]['project'] = project
+            cart_session[str(project.id)]['total_price'] = Decimal(cart_session[str(project.id)]['price']) * cart_session[str(project.id)]['quantity']
 
         for item in cart_session:
             item['total_price'] = Decimal(item['price']) * item['quantity']

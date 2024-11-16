@@ -73,14 +73,14 @@
 						</div>
 						<div class="order-summary">
 							<div class="order-col">
-								<div><strong>PRODUCT</strong></div>
+								<div><strong>project</strong></div>
 								<div><strong>TOTAL</strong></div>
 							</div>
-							<div class="order-products">
+							<div class="order-projects">
 								{% for item in cart %}
 								<div class="order-col">
-									<div>{{ item.quantity }}x {{ item.product.title }}</div>
-									<div>${{ item.product.price }}</div>
+									<div>{{ item.quantity }}x {{ item.project.title }}</div>
+									<div>${{ item.project.price }}</div>
 								</div>
 								{% endfor %}
 							</div>

@@ -14,8 +14,8 @@
 
 	/////////////////////////////////////////
 
-	// Products Slick
-	$('.products-slick').each(function() {
+	// project Slick
+	$('.project-slick').each(function() {
 		var $this = $(this),
 				$nav = $this.attr('data-nav');
 
@@ -46,8 +46,8 @@
 		});
 	});
 
-	// Products Widget Slick
-	$('.products-widget-slick').each(function() {
+	// project Widget Slick
+	$('.project-widget-slick').each(function() {
 		var $this = $(this),
 				$nav = $this.attr('data-nav');
 
@@ -63,18 +63,18 @@
 
 	/////////////////////////////////////////
 
-	// Product Main img Slick
-	$('#product-main-img').slick({
+	// project Main img Slick
+	$('#project-main-img').slick({
     infinite: true,
     speed: 300,
     dots: false,
     arrows: true,
     fade: true,
-    asNavFor: '#product-imgs',
+    asNavFor: '#project-imgs',
   });
 
-	// Product imgs Slick
-  $('#product-imgs').slick({
+	// project imgs Slick
+  $('#project-imgs').slick({
     slidesToShow: 3,
     slidesToScroll: 1,
     arrows: true,
@@ -82,7 +82,7 @@
     focusOnSelect: true,
 		centerPadding: 0,
 		vertical: true,
-    asNavFor: '#product-main-img',
+    asNavFor: '#project-main-img',
 		responsive: [{
         breakpoint: 991,
         settings: {
@@ -94,10 +94,10 @@
     ]
   });
 
-	// Product img zoom
-	var zoomMainProduct = document.getElementById('product-main-img');
-	if (zoomMainProduct) {
-		$('#product-main-img .product-preview').zoom();
+	// project img zoom
+	var zoomMainproject = document.getElementById('project-main-img');
+	if (zoomMainproject) {
+		$('#project-main-img .project-preview').zoom();
 	}
 
 	/////////////////////////////////////////

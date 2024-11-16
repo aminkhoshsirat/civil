@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}Product{% endblock title %}
+{% block title %}project{% endblock title %}
 {% block content %}
 
 		<!-- BREADCRUMB -->
@@ -15,7 +15,7 @@
 							<li><a href="#">All Categories</a></li>
 							<li><a href="#">Accessories</a></li>
 							<li><a href="#">Headphones</a></li>
-							<li class="active">{{ product.title }}</li>
+							<li class="active">{{ project.title }}</li>
 						</ul>
 					</div>
 				</div>
@@ -31,56 +31,56 @@
 			<div class="container">
 				<!-- row -->
 				<div class="row">
-					<!-- Product main img -->
+					<!-- project main img -->
 					<div class="col-md-5 col-md-push-2">
-						<div id="product-main-img">
-							<div class="product-preview">
-								<img src="{{product.image.url}}" alt="">
+						<div id="project-main-img">
+							<div class="project-preview">
+								<img src="{{project.image.url}}" alt="">
 							</div>
 
-							<div class="product-preview">
-								<img src="{% static './img/product03.png' %}" alt="">
+							<div class="project-preview">
+								<img src="{% static './img/project03.png' %}" alt="">
 							</div>
 
-							<div class="product-preview">
-								<img src="{% static './img/product06.png' %}" alt="">
+							<div class="project-preview">
+								<img src="{% static './img/project06.png' %}" alt="">
 							</div>
 
-							<div class="product-preview">
-								<img src="{% static './img/product08.png' %}" alt="">
+							<div class="project-preview">
+								<img src="{% static './img/project08.png' %}" alt="">
 							</div>
 						</div>
 					</div>
-					<!-- /Product main img -->
+					<!-- /project main img -->
 
-					<!-- Product thumb imgs -->
+					<!-- project thumb imgs -->
 					<div class="col-md-2  col-md-pull-5">
-						<div id="product-imgs">
-							<div class="product-preview">
-								<img src="{% static './img/product01.png' %}" alt="">
+						<div id="project-imgs">
+							<div class="project-preview">
+								<img src="{% static './img/project01.png' %}" alt="">
 							</div>
 
-							<div class="product-preview">
-								<img src="{% static './img/product03.png' %}" alt="">
+							<div class="project-preview">
+								<img src="{% static './img/project03.png' %}" alt="">
 							</div>
 
-							<div class="product-preview">
-								<img src="{% static './img/product06.png' %}" alt="">
+							<div class="project-preview">
+								<img src="{% static './img/project06.png' %}" alt="">
 							</div>
 
-							<div class="product-preview">
-								<img src="{% static './img/product08.png' %}" alt="">
+							<div class="project-preview">
+								<img src="{% static './img/project08.png' %}" alt="">
 							</div>
 						</div>
 					</div>
-					<!-- /Product thumb imgs -->
+					<!-- /project thumb imgs -->
 
-					<!-- Product details -->
+					<!-- project details -->
 					<div class="col-md-5">
-						<div class="product-details">
-							<h2 class="product-name">{{ product.title }}</h2>
+						<div class="project-details">
+							<h2 class="project-name">{{ project.title }}</h2>
 							<div>
-								<div class="product-rating">
+								<div class="project-rating">
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
@@ -90,12 +90,12 @@
 								<a class="review-link" href="#">10 Review(s) | Add your review</a>
 							</div>
 							<div>
-								<h3 class="product-price">{{ product.price }}<del class="product-old-price">$990.00</del></h3>
-								<span class="product-available">In Stock</span>
+								<h3 class="project-price">{{ project.price }}<del class="project-old-price">$990.00</del></h3>
+								<span class="project-available">In Stock</span>
 							</div>
-							<p>{{ product.content }}</p>
+							<p>{{ project.content }}</p>
 
-							<div class="product-options">
+							<div class="project-options">
 								<label>
 									Size
 									<select class="input-select">
@@ -111,12 +111,12 @@
 							</div>
 
 							<div class="add-to-cart">
-								<form method="post" action="{% url 'homePage:add_to_cart' %}">
+								<form method="post" action="{% url 'homePage:detail' id=Projects.id title=Projects.title %}">
 									<div class="qty-label">
 										Qty
 										<div class="input-number">
 											<input type="number" name="quantity" value="1">
-											<input type="hidden" name="product_id" value="{{ product.id }}">
+											<input type="hidden" name="project_id" value="{{ project.id }}">
 											<input type="hidden" name="update" value="0">
 											<span class="qty-up">+</span>
 											<span class="qty-down">-</span>
@@ -127,18 +127,18 @@
 								</form>
 							</div>
 
-							<ul class="product-btns">
+							<ul class="project-btns">
 								<li><a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
 								<li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li>
 							</ul>
 
-							<ul class="product-links">
+							<ul class="project-links">
 								<li>Category:</li>
 								<li><a href="#">Headphones</a></li>
 								<li><a href="#">Accessories</a></li>
 							</ul>
 
-							<ul class="product-links">
+							<ul class="project-links">
 								<li>Share:</li>
 								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
 								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -148,20 +148,20 @@
 
 						</div>
 					</div>
-					<!-- /Product details -->
+					<!-- /project details -->
 
-					<!-- Product tab -->
+					<!-- project tab -->
 					<div class="col-md-12">
-						<div id="product-tab">
-							<!-- product tab nav -->
+						<div id="project-tab">
+							<!-- project tab nav -->
 							<ul class="tab-nav">
 								<li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
 								<li><a data-toggle="tab" href="#tab2">Details</a></li>
 								<li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li>
 							</ul>
-							<!-- /product tab nav -->
+							<!-- /project tab nav -->
 
-							<!-- product tab content -->
+							<!-- project tab content -->
 							<div class="tab-content">
 								<!-- tab1  -->
 								<div id="tab1" class="tab-pane fade in active">
@@ -360,10 +360,10 @@
 								</div>
 								<!-- /tab3  -->
 							</div>
-							<!-- /product tab content  -->
+							<!-- /project tab content  -->
 						</div>
 					</div>
-					<!-- /product tab -->
+					<!-- /project tab -->
 				</div>
 				<!-- /row -->
 			</div>
@@ -380,26 +380,26 @@
 
 					<div class="col-md-12">
 						<div class="section-title text-center">
-							<h3 class="title">Related Products</h3>
+							<h3 class="title">Related projects</h3>
 						</div>
 					</div>
 
-					<!-- product -->
+					<!-- project -->
 					<div class="col-md-3 col-xs-6">
-						<div class="product">
-							<div class="product-img">
-								<img src="{% static './img/product01.png' %}" alt="">
-								<div class="product-label">
+						<div class="project">
+							<div class="project-img">
+								<img src="{% static './img/project01.png' %}" alt="">
+								<div class="project-label">
 									<span class="sale">-30%</span>
 								</div>
 							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name"><a href="#">product name goes here</a></h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								<div class="product-rating">
+							<div class="project-body">
+								<p class="project-category">Category</p>
+								<h3 class="project-name"><a href="#">project name goes here</a></h3>
+								<h4 class="project-price">$980.00 <del class="project-old-price">$990.00</del></h4>
+								<div class="project-rating">
 								</div>
-								<div class="product-btns">
+								<div class="project-btns">
 									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
 									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
 									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
@@ -410,29 +410,29 @@
 							</div>
 						</div>
 					</div>
-					<!-- /product -->
+					<!-- /project -->
 
-					<!-- product -->
+					<!-- project -->
 					<div class="col-md-3 col-xs-6">
-						<div class="product">
-							<div class="product-img">
-								<img src="{% static './img/product02.png' %}" alt="">
-								<div class="product-label">
+						<div class="project">
+							<div class="project-img">
+								<img src="{% static './img/project02.png' %}" alt="">
+								<div class="project-label">
 									<span class="new">NEW</span>
 								</div>
 							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name"><a href="#">product name goes here</a></h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								<div class="product-rating">
+							<div class="project-body">
+								<p class="project-category">Category</p>
+								<h3 class="project-name"><a href="#">project name goes here</a></h3>
+								<h4 class="project-price">$980.00 <del class="project-old-price">$990.00</del></h4>
+								<div class="project-rating">
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 								</div>
-								<div class="product-btns">
+								<div class="project-btns">
 									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
 									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
 									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
@@ -443,28 +443,28 @@
 							</div>
 						</div>
 					</div>
-					<!-- /product -->
+					<!-- /project -->
 
 					<div class="clearfix visible-sm visible-xs"></div>
 
-					<!-- product -->
+					<!-- project -->
 					<div class="col-md-3 col-xs-6">
-						<div class="product">
-							<div class="product-img">
-								<img src="{% static './img/product03.png' %}" alt="">
+						<div class="project">
+							<div class="project-img">
+								<img src="{% static './img/project03.png' %}" alt="">
 							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name"><a href="#">product name goes here</a></h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								<div class="product-rating">
+							<div class="project-body">
+								<p class="project-category">Category</p>
+								<h3 class="project-name"><a href="#">project name goes here</a></h3>
+								<h4 class="project-price">$980.00 <del class="project-old-price">$990.00</del></h4>
+								<div class="project-rating">
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star-o"></i>
 								</div>
-								<div class="product-btns">
+								<div class="project-btns">
 									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
 									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
 									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
@@ -475,21 +475,21 @@
 							</div>
 						</div>
 					</div>
-					<!-- /product -->
+					<!-- /project -->
 
-					<!-- product -->
+					<!-- project -->
 					<div class="col-md-3 col-xs-6">
-						<div class="product">
-							<div class="product-img">
-								<img src="{% static './img/product04.png' %}" alt="">
+						<div class="project">
+							<div class="project-img">
+								<img src="{% static './img/project04.png' %}" alt="">
 							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name"><a href="#">product name goes here</a></h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								<div class="product-rating">
+							<div class="project-body">
+								<p class="project-category">Category</p>
+								<h3 class="project-name"><a href="#">project name goes here</a></h3>
+								<h4 class="project-price">$980.00 <del class="project-old-price">$990.00</del></h4>
+								<div class="project-rating">
 								</div>
-								<div class="product-btns">
+								<div class="project-btns">
 									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
 									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
 									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
@@ -500,7 +500,7 @@
 							</div>
 						</div>
 					</div>
-					<!-- /product -->
+					<!-- /project -->
 
 				</div>
 				<!-- /row -->

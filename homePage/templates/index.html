@@ -79,34 +79,34 @@
 					</div>
 					<!-- /section title -->
 
-					<!-- Products tab & slick -->
+					<!-- project tab & slick -->
 					<div class="col-md-12">
 						<div class="row">
-							<div class="products-tabs">
+							<div class="project-tabs">
 								<!-- tab -->
 								<div id="tab1" class="tab-pane active">
-									<div class="products-slick" data-nav="#slick-nav-1">
-										{% for product in products %}
-											<!-- product -->
-											<div class="product">
-												<div class="product-img">
-													<img src=" {{product.image.url}}" alt="">
+									<div class="project-slick" data-nav="#slick-nav-1">
+										{% for project in Project %}
+											<!-- project -->
+											<div class="project">
+												<div class="project-img">
+													<img src=" {{project.image.url}}" alt="">
 												</div>
-												<div class="product-body">
-													<p class="product-category">{{ product.category }}</p>
-													<h3 class="product-name"><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></h3>
+												<div class="project-body">
+													<p class="project-category">{{ project.category }}</p>
+													<h3 class="project-name"><a href="{{ project.get_absolute_url }}">{{ project.title }}</a></h3>
 												</div>
 											</div>
-											<!-- /product -->
+											<!-- /project -->
 										{% endfor %}
 									</div>
-									<div id="slick-nav-1" class="products-slick-nav"></div>
+									<div id="slick-nav-1" class="project-slick-nav"></div>
 								</div>
 								<!-- /tab -->
 							</div>
 						</div>
 					</div>
-					<!-- Products tab & slick -->
+					<!-- project tab & slick -->
 				</div>
 				<!-- /row -->
 			</div>
@@ -136,36 +136,36 @@
 			</div>
 
 			<div class="container">
-					<!-- Products Tab & Slick -->
+					<!-- project Tab & Slick -->
 				<div class="row">
 					<div class="col-md-12">
-						<div class="products-tabs">
+						<div class="project-tabs">
 							<!-- Tab -->
 							<div id="tab2" class="tab-pane active">
-								<div class="products-slick" data-nav="#slick-nav-3">
-									{% for product in products %}
-										<!-- Product -->
-										<div class="product">
-											<div class="product-img">
-												<img src="{{ product.image.url }}" alt="{{ product.title }}">
+								<div class="project-slick" data-nav="#slick-nav-3">
+									{% for coworking in Coworking %}
+										<!-- project -->
+										<div class="project">
+											<div class="project-img">
+												<img src="{{ coworking.image.url }}" alt="{{ project.title }}">
 											</div>
-											<div class="product-body">
-												<p class="product-category">{{ product.category }}</p>
-												<h3 class="product-name">
-													<a href="{{ product.get_absolute_url }}">{{ product.title }}</a>
+											<div class="project-body">
+												<p class="project-category">{{ coworking.category }}</p>
+												<h3 class="project-name">
+													<a href="{{ coworking.get_absolute_url }}">{{ coworking.title }}</a>
 												</h3>
 											</div>
 										</div>
-										<!-- /Product -->
+										<!-- /project -->
 									{% endfor %}
 								</div>
-								<div id="slick-nav-3" class="products-slick-nav"></div>
+								<div id="slick-nav-3" class="project-slick-nav"></div>
 							</div>
 							<!-- /Tab -->
 						</div>
 					</div>
 				</div>
-				<!-- /Products Tab & Slick -->
+				<!-- /project Tab & Slick -->
 
 			</div>
 

@@ -50,7 +50,7 @@
             <table>
                 <tr>
                     <th>Image</th>
-                    <th>Product Title</th>
+                    <th>project Title</th>
                     <th>Price</th>
                     <th>Quantity</th>
                     <th>Total Price</th>
@@ -58,12 +58,12 @@
                 </tr>
                 {% for item in cart %}
                 <tr>
-                    <td><img src="{{ item.product.image.url }}" alt="{{ item.product }}" width="150"/></td>
-                    <td><a href="{{ item.product.get_absolute_url }}">{{ item.product.title }}</a></td>
+                    <td><img src="{{ item.project.image.url }}" alt="{{ item.project }}" width="150"/></td>
+                    <td><a href="{{ item.project.get_absolute_url }}">{{ item.project.title }}</a></td>
                     <td>{{ item.price }}</td>
                     <td>{{ item.quantity }}</td>
                     <td>{{ item.total_price }}</td>
-                    <td><a href="{% url 'homePage:remove_from_cart' item.product.id %}">Remove</a></td>
+                    <td><a href="{% url 'homePage:remove_from_cart' item.project.id %}">Remove</a></td>
                 </tr>
                 {% endfor %}
                 <tr>
