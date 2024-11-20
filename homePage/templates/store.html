@@ -3,6 +3,26 @@
 {% block title %}Index{% endblock title %}
 {% block content %}
 
+<style>
+	.content {
+  text-align: center; /* Centers the text horizontally */
+}
+
+.content p,
+.content h3 {
+  margin: 0; /* Optional: Adjusts default margins for better alignment */
+}
+
+.content h3 a {
+  text-decoration: none; /* Removes underline from the link */
+  color: inherit; /* Inherits the text color */
+}
+</style>
+
+<div class="container">
+
+	<!-- Current location address -->
+    <div class="row">
 		<!-- BREADCRUMB -->
 		<div id="breadcrumb" class="section">
 			<!-- container -->
@@ -22,291 +42,29 @@
 			<!-- /container -->
 		</div>
 		<!-- /BREADCRUMB -->
+	</div>
 
-		<!-- SECTION -->
-		<div class="section">
-			<!-- container -->
-			<div class="container" >
-				<!-- row -->
-				<div class="row">
-					<!-- ASIDE -->
-					<div id="aside" class="col-md-3">
-						<!-- aside Widget -->
-						<div class="aside" dir="rtl">
-							<h3 class="aside-title">Categories</h3>
-							<div class="checkbox-filter">
 
-								<div class="input-checkbox">
-									<input type="checkbox" id="category-1">
-									<label for="category-1">
-										<span></span>
-										Laptops11111111
-										<small>(120)</small>
-									</label>
-								</div>
+	<!-- Main (Projects & filters) -->
+    <div class="row">
+        <!-- Left Section: Projects (9 Columns) -->
+        <div class="col-md-9">
 
-								<div class="input-checkbox">
-									<input type="checkbox" id="category-2">
-									<label for="category-2">
-										<span></span>
-										Smartphones222222222222
-										<small>(740)</small>
-									</label>
-								</div>
-
-								<div class="input-checkbox">
-									<input type="checkbox" id="category-3">
-									<label for="category-3">
-										<span></span>
-										Cameras33333333
-										<small>(1450)</small>
-									</label>
-								</div>
-
-								<div class="input-checkbox">
-									<input type="checkbox" id="category-4">
-									<label for="category-4">
-										<span></span>
-										Accessories
-										<small>(578)</small>
-									</label>
-								</div>
-
-								<div class="input-checkbox">
-									<input type="checkbox" id="category-5">
-									<label for="category-5">
-										<span></span>
-										Laptops
-										<small>(120)</small>
-									</label>
-								</div>
-
-								<div class="input-checkbox">
-									<input type="checkbox" id="category-6">
-									<label for="category-6">
-										<span></span>
-										Smartphones
-										<small>(740)</small>
-									</label>
-								</div>
-							</div>
-						</div>
-						<!-- /aside Widget -->
-
-						<!-- aside Widget -->
-						<div class="aside">
-							<h3 class="aside-title">Price</h3>
-							<div class="price-filter">
-								<div id="price-slider"></div>
-								<div class="input-number price-min">
-									<input id="price-min" type="number">
-									<span class="qty-up">+</span>
-									<span class="qty-down">-</span>
-								</div>
-								<span>-</span>
-								<div class="input-number price-max">
-									<input id="price-max" type="number">
-									<span class="qty-up">+</span>
-									<span class="qty-down">-</span>
-								</div>
-							</div>
-						</div>
-						<!-- /aside Widget -->
-
-						<!-- aside Widget -->
-						<div class="aside">
-							<h3 class="aside-title">Brand</h3>
-							<div class="checkbox-filter">
-								<div class="input-checkbox">
-									<input type="checkbox" id="brand-1">
-									<label for="brand-1">
-										<span></span>
-										SAMSUNG
-										<small>(578)</small>
-									</label>
-								</div>
-								<div class="input-checkbox">
-									<input type="checkbox" id="brand-2">
-									<label for="brand-2">
-										<span></span>
-										LG
-										<small>(125)</small>
-									</label>
-								</div>
-								<div class="input-checkbox">
-									<input type="checkbox" id="brand-3">
-									<label for="brand-3">
-										<span></span>
-										SONY
-										<small>(755)</small>
-									</label>
-								</div>
-								<div class="input-checkbox">
-									<input type="checkbox" id="brand-4">
-									<label for="brand-4">
-										<span></span>
-										SAMSUNG
-										<small>(578)</small>
-									</label>
-								</div>
-								<div class="input-checkbox">
-									<input type="checkbox" id="brand-5">
-									<label for="brand-5">
-										<span></span>
-										LG
-										<small>(125)</small>
-									</label>
-								</div>
-								<div class="input-checkbox">
-									<input type="checkbox" id="brand-6">
-									<label for="brand-6">
-										<span></span>
-										SONY
-										<small>(755)</small>
-									</label>
-								</div>
-							</div>
-						</div>
-						<!-- /aside Widget -->
-
-						<!-- aside Widget -->
-						<div class="aside">
-							<h3 class="aside-title">Top selling</h3>
-							<div class="project-widget">
-								<div class="project-img">
-									<img src="{% static './img/project01.png' %}" alt="">
-								</div>
-								<div class="project-body">
-									<p class="project-category">Category</p>
-									<h3 class="project-name"><a href="#">project name goes here0</a></h3>
-									<h4 class="project-price">$980.00 <del class="project-old-price">$990.00</del></h4>
-								</div>
-							</div>
-
-							<div class="project-widget">
-								<div class="project-img">
-									<img src="{% static './img/project02.png' %}" alt="">
-								</div>
-								<div class="project-body">
-									<p class="project-category">Category</p>
-									<h3 class="project-name"><a href="#">project name goes here1</a></h3>
-									<h4 class="project-price">$980.00 <del class="project-old-price">$990.00</del></h4>
-								</div>
-							</div>
-
-							<div class="project-widget">
-								<div class="project-img">
-									<img src="{% static './img/project03.png' %}" alt="">
-								</div>
-								<div class="project-body">
-									<p class="project-category">Category</p>
-									<h3 class="project-name"><a href="#">project name goes here2</a></h3>
-									<h4 class="project-price">$980.00 <del class="project-old-price">$990.00</del></h4>
-								</div>
-							</div>
-						</div>
-						<!-- /aside Widget -->
-					</div>
-					<!-- /ASIDE -->
-
-					<!-- STORE -->
-					<div id="store" class="col-md-9">
-						<!-- store top filter -->
-						<div class="store-filter clearfix">
-							<div class="store-sort">
-								<label>
-									Sort By:
-									<select class="input-select">
-										<option value="0">Popular</option>
-										<option value="1">Position</option>
-									</select>
-								</label>
-
-								<label>
-									Show:
-									<select class="input-select">
-										<option value="0">20</option>
-										<option value="1">50</option>
-									</select>
-								</label>
-							</div>
-							<ul class="store-grid">
-								<li class="active"><i class="fa fa-th"></i></li>
-								<li><a href="#"><i class="fa fa-th-list"></i></a></li>
-							</ul>
-						</div>
-						<!-- /store top filter -->
-
-						<!-- store project -->
+            <div class="row">
+                <!-- Project Cards: 3 Columns per Project -->
+                <div class="col-md-4">
+                    <!-- Project Content -->
+					<div class="container">
 						<div class="row">
-							{% for project in Project %}
-							<!-- project -->
-							<div class="col-md-4 col-xs-6">
-								<div class="project">
-									<div class="project-img">
-										<img src="{{project.image.url}}" alt="">
-<!--										<div class="project-label">-->
-<!--											<span class="sale">-30%</span>-->
-<!--											<span class="new">NEW</span>-->
-<!--										</div>-->
-									</div>
-									<div class="project-body">
-										<p class="project-category">Category</p>
-										<h3 class="project-name"><a href="{{ project.get_absolute_url }}">{{ project.title }}</a></h3>
-<!--										<h4 class="project-price">{{ project.price }} <del class="project-old-price">$990.00</del></h4>-->
-<!--										<div class="project-rating">-->
-<!--											<i class="fa fa-star"></i>-->
-<!--											<i class="fa fa-star"></i>-->
-<!--											<i class="fa fa-star"></i>-->
-<!--											<i class="fa fa-star"></i>-->
-<!--											<i class="fa fa-star"></i>-->
-<!--										</div>-->
-<!--										<div class="project-btns">-->
-<!--											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>-->
-<!--											<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>-->
-<!--											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>-->
-<!--										</div>-->
-<!--									</div>-->
-<!--									<div class="add-to-cart">-->
-<!--										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>-->
-<!--									</div>-->
-								</div>
-							</div>
-							<!-- /project -->
-							{% endfor %}
-
-						</div>
-						<!-- /store project -->
-
-						<!-- store bottom filter -->
-						<div class="store-filter clearfix">
-							<span class="store-qty">Showing 20-100 projects</span>
-							<ul class="store-pagination">
-								<li class="active">1</li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-							</ul>
-						</div>
-						<!-- /store bottom filter -->
-					</div>
-					<!-- /STORE -->
-
-
-
-					<!-- project tab & slick -->
-					<div class="col-md-12">
-						<div class="row">
-							<div class="project-tabs">
-								<!-- tab -->
-								<div id="tab1" class="tab-pane active">
-									<div class="project-slick" data-nav="#slick-nav-1">
-										{% for project in Project %}
+							<!-- Left Section: Projects -->
+							<div class="col-md-9">
+								<div class="row">
+									{% for project in Project %}
+										<div class="col-md-4">
 											<!-- project -->
 											<div class="project">
 												<div class="project-img">
-													<img src=" {{project.image.url}}" alt="">
+													<img src="{{ project.image.url }}" alt="">
 												</div>
 												<div class="project-body">
 													<p class="project-category">{{ project.category }}</p>
@@ -314,23 +72,264 @@
 												</div>
 											</div>
 											<!-- /project -->
-										{% endfor %}
-									</div>
-									<div id="slick-nav-1" class="project-slick-nav"></div>
+										</div>
+										{% if forloop.counter|divisibleby:3 and not forloop.last %}
+											</div>
+								<div class="row">
+										{% endif %}
+									{% endfor %}
 								</div>
-								<!-- /tab -->
 							</div>
 						</div>
 					</div>
-					<!-- project tab & slick -->
+                </div>
+                <!-- Repeat for other projects -->
+            </div>
+        </div>
 
+        <!-- Right Section: Filters (3 Columns) -->
+        <div class="col-md-3" dir="rtl">
 
+            <!-- Filter by Categories -->
+            <div>
+				<!-- Category Filters-->
+				<form method="GET" action="{% url 'homePage:store' %}" id="filter-form">
+					<h4>دسته بندی ها</h4>
+					{% for category in categories %}
+						<div class="form-check">
+							<input
+								class="form-check-input"
+								type="checkbox"
+								name="category"
+								value="{{ category.original }}"
+								id="category-{{ forloop.counter }}"
+								{% if category.original in selected_categories %}checked{% endif %}>
+							<label class="form-check-label" for="category-{{ forloop.counter }}">
+								{{ category.translated }}
+							</label>
+						</div>
+					{% endfor %}
+				</form>
+            </div>
+
+            <!-- Filter by Total Area -->
+            <div>
+				<hr>
+                <!-- Total Area Filters -->
+				<div class="aside">
+					<h3 class="aside-title">متراژ زیربنا</h3>
+					<div class="price-filter">
+						<div id="price-slider"></div>
+						<div class="input-number price-min">
+							<input id="price-min" type="number" min="1" max="40000">
+							<span class="qty-up">+</span>
+							<span class="qty-down">-</span>
+						</div>
+						<span>-</span>
+						<div class="input-number price-max">
+							<input id="price-max" type="number" min="1" max="40000">
+							<span class="qty-up">+</span>
+							<span class="qty-down">-</span>
+						</div>
+					</div>
 				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /SECTION -->
+            </div>
 
+            <!-- Filter by Floor System -->
+            <div>
+				<hr>
+                <!-- Floor System Filters -->
+				<div class="filter-floor mt-4">
+										<h5>سیستم باربر ثقلی</h5>
+										<select name="floor_system" class="form-select">
+											<option value="">-- Select --</option>
+											<option value="flat">دال توپر</option>
+											<option value="flat">دال پیش تنیده</option>
+											<option value="waffle">دال وافل</option>
+											<option value="ribbed">تیرچه بلوک</option>
+											<option value="ribbed">تیرچه پیش تنیده</option>
+											<option value="ribbed">کرومیت</option>
+											<option value="ribbed">کامپوزیت</option>
+											<option value="ribbed">عرشه فولادی</option>
+										</select>
+										<button type="submit" class="btn btn-primary mt-3">Apply</button>
+									</div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--		&lt;!&ndash; SECTION &ndash;&gt;-->
+<!--		<div class="section">-->
+<!--			&lt;!&ndash; container &ndash;&gt;-->
+<!--			<div class="container">-->
+<!--				&lt;!&ndash; row &ndash;&gt;-->
+<!--				<div class="row" dir="rtl">-->
+
+
+
+
+
+
+							<!-- Right Section: Filters -->
+
+
+
+									<!-- Total Area Filter -->
+
+
+									<!-- Floor System Filter -->
+
+
+
+
+
+
+
+
+<!--					&lt;!&ndash; store top filter &ndash;&gt;-->
+<!--					<div id="store" class="col-md-9 order-md-1">-->
+
+<!--						&lt;!&ndash; Gallery Grid &ndash;&gt;-->
+<!--						<div class="row">-->
+<!--							{% for project in page_obj %}-->
+<!--							<div class="column nature">-->
+<!--								<div class="content">-->
+<!--									<img src="{{ project.image.url }}" alt="Mountains" style="width:100%">-->
+<!--									<p class="project-category">{{ project.category }}</p>-->
+<!--									<h3 class="project-name"><a href="{{ project.get_absolute_url }}">{{ project.title }}</a></h3>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--							{% endfor %}-->
+<!--						</div>-->
+<!--						&lt;!&ndash; END GRID &ndash;&gt;-->
+
+<!--						&lt;!&ndash; Pagination &ndash;&gt;-->
+<!--						<div class="pagination">-->
+<!--							<ul class="pagination-list">-->
+<!--								{% if page_obj.has_previous %}-->
+<!--								<li>-->
+<!--									<a href="?page=1{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">First</a>-->
+<!--								</li>-->
+<!--								<li>-->
+<!--									<a href="?page={{ page_obj.previous_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">-->
+<!--										Previous-->
+<!--									</a>-->
+<!--								</li>-->
+<!--								{% endif %}-->
+
+<!--								{% for num in page_obj.paginator.page_range %}-->
+<!--								<li class="{% if page_obj.number == num %}active{% endif %}">-->
+<!--									<a href="?page={{ num }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">-->
+<!--										{{ num }}-->
+<!--									</a>-->
+<!--								</li>-->
+<!--								{% endfor %}-->
+
+<!--								{% if page_obj.has_next %}-->
+<!--								<li>-->
+<!--									<a href="?page={{ page_obj.next_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">-->
+<!--										Next-->
+<!--									</a>-->
+<!--								</li>-->
+<!--								<li>-->
+<!--									<a href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">-->
+<!--										Last-->
+<!--									</a>-->
+<!--								</li>-->
+<!--								{% endif %}-->
+<!--							</ul>-->
+<!--						</div>-->
+<!--						&lt;!&ndash; End Pagination &ndash;&gt;-->
+
+<!--					</div>-->
+<!--					&lt;!&ndash; /store top filter &ndash;&gt;-->
+
+<!--					 ASIDE-->
+<!--					<div id="aside" class="col-md-3 order-md-2">-->
+<!--						&lt;!&ndash; aside Widget &ndash;&gt;-->
+<!--						<div class="aside">-->
+<!--							<h3 class="aside-title">دسته بندی ها</h3>-->
+<!--							<form id="filter-form" method="get">-->
+<!--								<div class="checkbox-filter">-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--								</div>-->
+<!--								&lt;!&ndash; Add a submit button (hidden, triggered by JavaScript) &ndash;&gt;-->
+<!--								<button type="submit" style="display: none;"></button>-->
+<!--							</form>-->
+<!--						</div>-->
+<!--						&lt;!&ndash; /aside Widget &ndash;&gt;-->
+
+
+<!--						&lt;!&ndash; aside Widget &ndash;&gt;-->
+<!--						<div class="aside">-->
+<!--							<h3 class="aside-title">متراژ زیربنا</h3>-->
+<!--							<div class="price-filter">-->
+<!--								<div id="price-slider"></div>-->
+<!--								<div class="input-number price-min">-->
+<!--									<input id="price-min" type="number">-->
+<!--									<span class="qty-up">+</span>-->
+<!--									<span class="qty-down">-</span>-->
+<!--								</div>-->
+<!--								<span>-</span>-->
+<!--								<div class="input-number price-max">-->
+<!--									<input id="price-max" type="number">-->
+<!--									<span class="qty-up">+</span>-->
+<!--									<span class="qty-down">-</span>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--						&lt;!&ndash; /aside Widget &ndash;&gt;-->
+
+<!--					</div>-->
+<!--					 /ASIDE-->
+
+<!--				</div>-->
+<!--				&lt;!&ndash; /row &ndash;&gt;-->
+
+
+<!--			</div>-->
+<!--			&lt;!&ndash; /container &ndash;&gt;-->
+<!--		</div>-->
+<!--		&lt;!&ndash; /SECTION &ndash;&gt;-->
+<!--		</div>-->
 
 {% endblock content %}

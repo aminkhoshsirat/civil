@@ -147,23 +147,63 @@
 	}
 
 	// Price Slider
-	var priceSlider = document.getElementById('price-slider');
-	if (priceSlider) {
-		noUiSlider.create(priceSlider, {
-			start: [1, 999],
-			connect: true,
-			step: 1,
-			range: {
-				'min': 1,
-				'max': 999
-			}
-		});
+document.addEventListener('DOMContentLoaded', function () {
+    var priceSlider = document.getElementById('price-slider');
+    noUiSlider.create(priceSlider, {
+        start: [1, 40000], // Initial values for the slider
+        connect: true,     // Connect the two handles with a bar
+        range: {
+            min: 1000,        // Minimum value
+            max: 40000     // Maximum value
+        },
+        step: 1,           // Increment step
+        format: {
+            to: function (value) {
+                return Math.round(value); // Round off decimal values
+            },
+            from: function (value) {
+                return value;
+            }
+        }
+    });
 
-		priceSlider.noUiSlider.on('update', function( values, handle ) {
-			var value = values[handle];
-			handle ? priceInputMax.value = value : priceInputMin.value = value
-		});
-	}
+    // Link slider to input fields
+    var inputMin = document.getElementById('price-min');
+    var inputMax = document.getElementById('price-max');
+
+    priceSlider.noUiSlider.on('update', function (values, handle) {
+        if (handle === 0) {
+            inputMin.value = values[0]; // Set the minimum input value
+        } else {
+            inputMax.value = values[1]; // Set the maximum input value
+        }
+    });
+
+    // Sync input fields with slider
+    inputMin.addEventListener('change', function () {
+        priceSlider.noUiSlider.set([this.value, null]);
+    });
+
+    inputMax.addEventListener('change', function () {
+        priceSlider.noUiSlider.set([null, this.value]);
+    });
+});
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById('filter-form');
+    const checkboxes = document.querySelectorAll('#filter-form .form-check-input');
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            form.submit();
+        });
+    });
+});
+
+
+
 
 })
 (jQuery);

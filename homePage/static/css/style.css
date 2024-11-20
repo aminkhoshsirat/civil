@@ -1128,11 +1128,13 @@ textarea.input {
   text-transform: uppercase;
   font-size: 10px;
   color: #8D99AE;
+  text-align: center;
 }
 
 .project-widget .project-body .project-name {
   text-transform: uppercase;
   font-size: 12px;
+  text-align: center;
 }
 
 .project-widget .project-body .project-name>a {
@@ -1258,7 +1260,7 @@ textarea.input {
 
 /*-- Price Filter --*/
 
-#price-slider {
+#area-slider {
   margin-bottom: 15px;
 }
 
@@ -1294,7 +1296,7 @@ textarea.input {
   display: none;
 }
 
-.price-filter .input-number {
+.area-filter .input-number {
   display: inline-block;
   width: calc(50% - 7px);
 }
@@ -2291,3 +2293,25 @@ textarea.input {
     background-color: #007b91;
     color: #fff;
 }
+
+
+/*----------------------------*\
+	Structure collection
+\*----------------------------*/
+
+.filters {
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+.filters h4 {
+    margin-bottom: 20px;
+}
+.filters .filter-category,
+.filters .filter-area,
+.filters .filter-floor {
+    margin-bottom: 20px;
+}
+
+

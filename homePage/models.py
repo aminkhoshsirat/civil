@@ -33,6 +33,7 @@ class Project(BaseModel):
     content = models.TextField()
     image = models.ImageField(upload_to='image/project')
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
+    total_Area = models.FloatField(null=True, blank=True)
 
     def __str__(self):
         return self.title
