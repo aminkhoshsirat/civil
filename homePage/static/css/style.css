@@ -371,8 +371,16 @@ textarea.input {
 #breadcrumb {
   padding: 30px 0px;
   background: #FBFBFC;
+  border-top: 20px solid white;
   border-bottom: 1px solid #E4E7ED;
   margin-bottom: 30px;
+
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
 }
 
 #breadcrumb .breadcrumb-header {
@@ -2314,4 +2322,9 @@ textarea.input {
     margin-bottom: 20px;
 }
 
+.pagination-wrapper {
+    display: flex;
+    justify-content: center; /* Center the pagination */
+    align-items: center; /* Align vertically (optional) */
+}
 

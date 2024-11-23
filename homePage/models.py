@@ -28,12 +28,27 @@ class Category(BaseModel):
     def __str__(self):
         return self.title
 
+class GravitySys(BaseModel):
+    title = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.title
+
+class LateralSys(BaseModel):
+    title = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.title
+
+
 class Project(BaseModel):
     title = models.CharField(max_length=100)
     content = models.TextField()
     image = models.ImageField(upload_to='image/project')
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
     total_Area = models.FloatField(null=True, blank=True)
+    gravity_loading_sys = models.ForeignKey(GravitySys, on_delete=models.SET_NULL, null=True, blank=True)
+    lateral_loading_sys = models.ForeignKey(LateralSys, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -42,6 +57,13 @@ class Project(BaseModel):
         from django.urls import reverse
         return reverse("homePage:detail", kwargs={"id":self.id, "title": self.title})
 
+class ProjectImage(models.Model):
+    project = models.ForeignKey(Project, related_name='images', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='image/project/')
+    caption = models.CharField(max_length=200, blank=True, null=True)  # Optional
+
+    def __str__(self):
+        return f"Image for {self.project.title}"
 
 class Coworking(BaseModel):
     title = models.CharField(max_length=100)
