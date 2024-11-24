@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Project, Coworking, Category, LateralSys, GravitySys, ProjectImage
+from .models import Project, ProjectImage, Coworking, Category, LateralSys, GravitySys
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -12,13 +12,20 @@ class CategoryAdmin(admin.ModelAdmin):
 
 class ProjectImageInline(admin.TabularInline):
     model = ProjectImage
-    extra = 1  # Number of additional empty image forms
+    extra = 1
+
+@admin.register(ProjectImage)
+class ProjectImageAdmin(admin.ModelAdmin):
+    list_display = ('project', 'caption')
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
     list_display = ('title', 'category', 'created_at', 'updated_at')
     search_fields = ('title', 'content')
     inlines = [ProjectImageInline]
+
+
+
 
 @admin.register(Coworking)
 class CoworkingAdmin(admin.ModelAdmin):

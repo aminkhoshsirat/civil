@@ -13,9 +13,9 @@
 					<div class="col-md-12">
 						<ul class="breadcrumb-tree">
 							<li><a href="#">خانه</a></li>
-							<li><a href="#">دسته بندی ها</a></li>
-							<li><a href="#">سازه هاب بتن آرمه</a></li>
-							<li class="active">{{ project.title }}</li>
+							<li><a href="#">  دسته بندی ها</a></li>
+							<li><a href="#">  {{ Project.category }}</a></li>
+							<li class="active">{{ Project.title }}</li>
 						</ul>
 					</div>
 				</div>
@@ -25,81 +25,40 @@
 		</div>
 		<!-- /BREADCRUMB -->
 
-		<!-- SECTION -->
+		<!--SECTION-->
 		<div class="section">
 			<!-- container -->
 			<div class="container">
 				<!-- row -->
 				<div class="row">
+
 					<!-- project main img -->
 					<div class="col-md-5 col-md-push-2">
 						<div id="project-main-img">
 
-							<div class="project-preview">
-								<img src="{% static './img/SteelStructure01.png' %}" alt="">
-							</div>
-
-							<div class="project-preview">
-								<img src="{% static './img/SteelStructure02.png' %}" alt="">
-							</div>
-
-							<div class="project-preview">
-								<img src="{% static './image/project/p1-1.png' %}" alt="">
-							</div>
-
-							<div class="project-preview">
-								<h4>{{ project.image.url }}</h4>
-								<img src="{{ project.image.url }}" alt="{{ project.title }}">
-							</div>
-
 						    <!-- Main Project Image -->
 							<div class="project-images">
-								<p>Main project image:</p>
-								<img src="{{ project.main_image.url }}" alt="Main Image"> <!-- If applicable -->
-								<h2>{{ project.title }}</h2>
-								<h2>{{ project.image.url }}</h2>
-
-<!--								<p>Additional project images:</p>-->
-<!--								<ul>-->
-<!--									{% for image in project.images.all %}-->
-<!--										<li><img src="{{ image.image.url}}" alt="Additional Image"></li>-->
-<!--									{% empty %}-->
-<!--										<li>No images available for this project.</li>-->
-<!--									{% endfor %}-->
-<!--								</ul>-->
+								<img src="{{ Project.image.url }}" alt="Main Image"> <!-- If applicable -->
 							</div>
+
+							{% for image in Project.images.all %}
+							<div class="project-preview">
+								<img src="{{ image.image.url }}" alt="{{ Project.title }}">
+							</div>
+							{% endfor %}
 
 						</div>
 					</div>
 					<!-- /project main img -->
 
-
-
 					<!-- project thumb imgs -->
 					<div class="col-md-2  col-md-pull-5">
 						<div id="project-imgs">
+							{% for image in Project.images.all %}
 							<div class="project-preview">
-								<img src="{% static './img/SteelStructure01.png' %}" alt="">
+								<img src="{{ image.image.url }}" alt="{{ Project.title }}">
 							</div>
-
-							<div class="project-preview">
-								<img src="{% static './img/SteelStructure02.png' %}" alt="">
-							</div>
-
-							<div class="project-preview">
-								<img src="{% static './img/SteelStructure01.png' %}" alt="">
-							</div>
-
-							<div class="project-preview">
-								<img src="{% static './img/SteelStructure02.png' %}" alt="">
-							</div>
-
-							    <!-- Additional Images -->
-							<div class="additional-images">
-								{% for image in project.images.all %}
-									<img src="{{ image.image.url }}" alt="Image {{ forloop.counter }} for {{ project.title }}" class="additional-image">
-								{% endfor %}
-							</div>
+							{% endfor %}
 						</div>
 					</div>
 					<!-- /project thumb imgs -->
@@ -140,7 +99,7 @@
 							</div>
 
 							<div class="add-to-cart">
-								<form method="post" action="{% url 'homePage:detail' id=Projects.id title=Projects.title %}">
+								<form method="post" action="{% url 'homePage:detail' id=Project.id title=Project.title %}">
 									<div class="qty-label">
 										Qty
 										<div class="input-number">
@@ -398,9 +357,9 @@
 			</div>
 			<!-- /container -->
 		</div>
-		<!-- /SECTION -->
+		<!--/SECTION-->
 
-		<!-- Section -->
+		<!--Section-->
 		<div class="section">
 			<!-- container -->
 			<div class="container">
@@ -536,6 +495,6 @@
 			</div>
 			<!-- /container -->
 		</div>
-		<!-- /Section -->
+		<!--/Section-->
 
 {% endblock content %}
