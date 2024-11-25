@@ -65,6 +65,8 @@
 
 	// project Main img Slick
 	$('#project-main-img').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
     infinite: true,
     speed: 300,
     dots: false,
@@ -75,7 +77,7 @@
 
 	// project imgs Slick
   $('#project-imgs').slick({
-    slidesToShow: 3,
+    slidesToShow: 2,
     slidesToScroll: 1,
     arrows: true,
     centerMode: true,
@@ -93,6 +95,7 @@
       },
     ]
   });
+
 
 	// project img zoom
 	var zoomMainproject = document.getElementById('project-main-img');

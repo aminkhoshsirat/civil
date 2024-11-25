@@ -15,7 +15,7 @@
 							<li><a href="#">خانه</a></li>
 							<li><a href="#">  دسته بندی ها</a></li>
 							<li><a href="#">  {{ Project.category }}</a></li>
-							<li class="active">{{ Project.title }}</li>
+							<li class="active">   {{ Project.title }}</li>
 						</ul>
 					</div>
 				</div>
@@ -32,28 +32,37 @@
 				<!-- row -->
 				<div class="row">
 
-					<!-- project main img -->
+					<!-- Project Main Image -->
 					<div class="col-md-5 col-md-push-2">
 						<div id="project-main-img">
-
-						    <!-- Main Project Image -->
+							<!-- Main Project Image -->
+							{% if Project.image %}
 							<div class="project-images">
-								<img src="{{ Project.image.url }}" alt="Main Image"> <!-- If applicable -->
+								<img src="{{ Project.image.url }}" alt="{{ Project.title }}">
 							</div>
+							{% endif %}
 
+							<!-- Additional Images -->
 							{% for image in Project.images.all %}
-							<div class="project-preview">
+							<div class="project-images">
 								<img src="{{ image.image.url }}" alt="{{ Project.title }}">
 							</div>
 							{% endfor %}
-
 						</div>
 					</div>
-					<!-- /project main img -->
+					<!-- /Project Main Image -->
 
-					<!-- project thumb imgs -->
-					<div class="col-md-2  col-md-pull-5">
+					<!-- Project Thumbnail Images -->
+					<div class="col-md-2 col-md-pull-5">
 						<div id="project-imgs">
+							<!-- Main Project Image as First Thumbnail -->
+							{% if Project.image %}
+							<div class="project-preview">
+								<img src="{{ Project.image.url }}" alt="{{ Project.title }}">
+							</div>
+							{% endif %}
+
+							<!-- Additional Thumbnails -->
 							{% for image in Project.images.all %}
 							<div class="project-preview">
 								<img src="{{ image.image.url }}" alt="{{ Project.title }}">
@@ -61,73 +70,17 @@
 							{% endfor %}
 						</div>
 					</div>
-					<!-- /project thumb imgs -->
+					<!-- /Project Thumbnail Images -->
 
 					<!-- project details -->
-					<div class="col-md-5">
+					<div class="col-md-5" dir="rtl">
 						<div class="project-details">
-							<h2 class="project-name">{{ project.title }}</h2>
-							<div>
-								<div class="project-rating">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star-o"></i>
-								</div>
-								<a class="review-link" href="#">10 Review(s) | Add your review</a>
-							</div>
-							<div>
-								<h3 class="project-price">{{ project.price }}<del class="project-old-price">$990.00</del></h3>
-								<span class="project-available">In Stock</span>
-							</div>
-							<p>{{ project.content }}</p>
+							<h2 class="project-name">{{ Project.title }}</h2>
 
-							<div class="project-options">
-								<label>
-									Size
-									<select class="input-select">
-										<option value="0">X</option>
-									</select>
-								</label>
-								<label>
-									Color
-									<select class="input-select">
-										<option value="0">Red</option>
-									</select>
-								</label>
-							</div>
+							<p>{{ Project.content|safe }}</p>
 
-							<div class="add-to-cart">
-								<form method="post" action="{% url 'homePage:detail' id=Project.id title=Project.title %}">
-									<div class="qty-label">
-										Qty
-										<div class="input-number">
-											<input type="number" name="quantity" value="1">
-											<input type="hidden" name="project_id" value="{{ project.id }}">
-											<input type="hidden" name="update" value="0">
-											<span class="qty-up">+</span>
-											<span class="qty-down">-</span>
-										</div>
-									</div>
-									<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-									{% csrf_token %}
-								</form>
-							</div>
-
-							<ul class="project-btns">
-								<li><a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
-								<li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li>
-							</ul>
-
-							<ul class="project-links">
-								<li>Category:</li>
-								<li><a href="#">Headphones</a></li>
-								<li><a href="#">Accessories</a></li>
-							</ul>
-
-							<ul class="project-links">
-								<li>Share:</li>
+							<ul class="project-links" align="center">
+								<li></li>
 								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
 								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
 								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
@@ -143,9 +96,9 @@
 						<div id="project-tab">
 							<!-- project tab nav -->
 							<ul class="tab-nav">
-								<li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
-								<li><a data-toggle="tab" href="#tab2">Details</a></li>
-								<li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li>
+								<li><a data-toggle="tab" href="#tab3">دیدگاه کارفرما</a></li>
+								<li><a data-toggle="tab" href="#tab2">جزییات</a></li>
+								<li class="active"><a data-toggle="tab" href="#tab1">توضیحات</a></li>
 							</ul>
 							<!-- /project tab nav -->
 
@@ -154,8 +107,8 @@
 								<!-- tab1  -->
 								<div id="tab1" class="tab-pane fade in active">
 									<div class="row">
-										<div class="col-md-12">
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+										<div class="col-md-12" dir="rtl">
+											<p>{{ Project.illustration }}</p>
 										</div>
 									</div>
 								</div>
@@ -164,8 +117,8 @@
 								<!-- tab2  -->
 								<div id="tab2" class="tab-pane fade in">
 									<div class="row">
-										<div class="col-md-12">
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+										<div class="col-md-12" dir="rtl">
+											<p>{{ Project.characteristic }}</p>
 										</div>
 									</div>
 								</div>
@@ -174,176 +127,9 @@
 								<!-- tab3  -->
 								<div id="tab3" class="tab-pane fade in">
 									<div class="row">
-										<!-- Rating -->
-										<div class="col-md-3">
-											<div id="rating">
-												<div class="rating-avg">
-													<span>4.5</span>
-													<div class="rating-stars">
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star-o"></i>
-													</div>
-												</div>
-												<ul class="rating">
-													<li>
-														<div class="rating-stars">
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-														</div>
-														<div class="rating-progress">
-															<div style="width: 80%;"></div>
-														</div>
-														<span class="sum">3</span>
-													</li>
-													<li>
-														<div class="rating-stars">
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star-o"></i>
-														</div>
-														<div class="rating-progress">
-															<div style="width: 60%;"></div>
-														</div>
-														<span class="sum">2</span>
-													</li>
-													<li>
-														<div class="rating-stars">
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star-o"></i>
-															<i class="fa fa-star-o"></i>
-														</div>
-														<div class="rating-progress">
-															<div></div>
-														</div>
-														<span class="sum">0</span>
-													</li>
-													<li>
-														<div class="rating-stars">
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star-o"></i>
-															<i class="fa fa-star-o"></i>
-															<i class="fa fa-star-o"></i>
-														</div>
-														<div class="rating-progress">
-															<div></div>
-														</div>
-														<span class="sum">0</span>
-													</li>
-													<li>
-														<div class="rating-stars">
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star-o"></i>
-															<i class="fa fa-star-o"></i>
-															<i class="fa fa-star-o"></i>
-															<i class="fa fa-star-o"></i>
-														</div>
-														<div class="rating-progress">
-															<div></div>
-														</div>
-														<span class="sum">0</span>
-													</li>
-												</ul>
-											</div>
+										<div class="col-md-12" dir="rtl">
+											<p>{{ Project.employer_opinion }}</p>
 										</div>
-										<!-- /Rating -->
-
-										<!-- Reviews -->
-										<div class="col-md-6">
-											<div id="reviews">
-												<ul class="reviews">
-													<li>
-														<div class="review-heading">
-															<h5 class="name">John</h5>
-															<p class="date">27 DEC 2018, 8:0 PM</p>
-															<div class="review-rating">
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star-o empty"></i>
-															</div>
-														</div>
-														<div class="review-body">
-															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-														</div>
-													</li>
-													<li>
-														<div class="review-heading">
-															<h5 class="name">John</h5>
-															<p class="date">27 DEC 2018, 8:0 PM</p>
-															<div class="review-rating">
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star-o empty"></i>
-															</div>
-														</div>
-														<div class="review-body">
-															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-														</div>
-													</li>
-													<li>
-														<div class="review-heading">
-															<h5 class="name">John</h5>
-															<p class="date">27 DEC 2018, 8:0 PM</p>
-															<div class="review-rating">
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star-o empty"></i>
-															</div>
-														</div>
-														<div class="review-body">
-															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-														</div>
-													</li>
-												</ul>
-												<ul class="reviews-pagination">
-													<li class="active">1</li>
-													<li><a href="#">2</a></li>
-													<li><a href="#">3</a></li>
-													<li><a href="#">4</a></li>
-													<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-												</ul>
-											</div>
-										</div>
-										<!-- /Reviews -->
-
-										<!-- Review Form -->
-										<div class="col-md-3">
-											<div id="review-form">
-												<form class="review-form">
-													<input class="input" type="text" placeholder="Your Name">
-													<input class="input" type="email" placeholder="Your Email">
-													<textarea class="input" placeholder="Your Review"></textarea>
-													<div class="input-rating">
-														<span>Your Rating: </span>
-														<div class="stars">
-															<input id="star5" name="rating" value="5" type="radio"><label for="star5"></label>
-															<input id="star4" name="rating" value="4" type="radio"><label for="star4"></label>
-															<input id="star3" name="rating" value="3" type="radio"><label for="star3"></label>
-															<input id="star2" name="rating" value="2" type="radio"><label for="star2"></label>
-															<input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
-														</div>
-													</div>
-													<button class="primary-btn">Submit</button>
-												</form>
-											</div>
-										</div>
-										<!-- /Review Form -->
 									</div>
 								</div>
 								<!-- /tab3  -->
@@ -367,127 +153,29 @@
 				<div class="row">
 
 					<div class="col-md-12">
-						<div class="section-title text-center">
-							<h3 class="title">Related projects</h3>
+						<div class="section-title text-center" dir="rtl">
+							<h3 class="title">پروژه های مشابه</h3>
 						</div>
 					</div>
 
+
 					<!-- project -->
+					{% for related_project in related_projects %}
+					<!-- Individual Related Project -->
 					<div class="col-md-3 col-xs-6">
 						<div class="project">
 							<div class="project-img">
-								<img src="{% static './img/project01.png' %}" alt="">
-								<div class="project-label">
-									<span class="sale">-30%</span>
-								</div>
+								<img src="{{ related_project.image.url }}" alt="">
 							</div>
 							<div class="project-body">
-								<p class="project-category">Category</p>
-								<h3 class="project-name"><a href="#">project name goes here</a></h3>
-								<h4 class="project-price">$980.00 <del class="project-old-price">$990.00</del></h4>
-								<div class="project-rating">
-								</div>
-								<div class="project-btns">
-									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-								</div>
-							</div>
-							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+								<p class="project-category">{{ related_project.category }}</p>
+								<h3 class="project-name">
+									<a href="{{ related_project.get_absolute_url }}">{{ related_project.title }}</a>
+								</h3>
 							</div>
 						</div>
 					</div>
-					<!-- /project -->
-
-					<!-- project -->
-					<div class="col-md-3 col-xs-6">
-						<div class="project">
-							<div class="project-img">
-								<img src="{% static './img/project02.png' %}" alt="">
-								<div class="project-label">
-									<span class="new">NEW</span>
-								</div>
-							</div>
-							<div class="project-body">
-								<p class="project-category">Category</p>
-								<h3 class="project-name"><a href="#">project name goes here</a></h3>
-								<h4 class="project-price">$980.00 <del class="project-old-price">$990.00</del></h4>
-								<div class="project-rating">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-								</div>
-								<div class="project-btns">
-									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-								</div>
-							</div>
-							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-							</div>
-						</div>
-					</div>
-					<!-- /project -->
-
-					<div class="clearfix visible-sm visible-xs"></div>
-
-					<!-- project -->
-					<div class="col-md-3 col-xs-6">
-						<div class="project">
-							<div class="project-img">
-								<img src="{% static './img/project03.png' %}" alt="">
-							</div>
-							<div class="project-body">
-								<p class="project-category">Category</p>
-								<h3 class="project-name"><a href="#">project name goes here</a></h3>
-								<h4 class="project-price">$980.00 <del class="project-old-price">$990.00</del></h4>
-								<div class="project-rating">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star-o"></i>
-								</div>
-								<div class="project-btns">
-									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-								</div>
-							</div>
-							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-							</div>
-						</div>
-					</div>
-					<!-- /project -->
-
-					<!-- project -->
-					<div class="col-md-3 col-xs-6">
-						<div class="project">
-							<div class="project-img">
-								<img src="{% static './img/project04.png' %}" alt="">
-							</div>
-							<div class="project-body">
-								<p class="project-category">Category</p>
-								<h3 class="project-name"><a href="#">project name goes here</a></h3>
-								<h4 class="project-price">$980.00 <del class="project-old-price">$990.00</del></h4>
-								<div class="project-rating">
-								</div>
-								<div class="project-btns">
-									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-								</div>
-							</div>
-							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-							</div>
-						</div>
-					</div>
+					{% endfor %}
 					<!-- /project -->
 
 				</div>

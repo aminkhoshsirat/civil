@@ -11,9 +11,9 @@ def index(request):
     return render(request,"index.html", {'Project':project, 'Coworking':coworking})
 
 def detail(request, id:int, title:str):
-    # project = get_object_or_404(Project,id=id)
     project = get_object_or_404(Project.objects.prefetch_related('images'),id=id)
-    context = {'Project' : project}
+    related_projects = Project.objects.filter(category=project.category).exclude(id=project.id)[:4]
+    context = {'Project' : project, 'related_projects': related_projects}
     return render(request,"detail.html", context)
 
 def project_list(request):
