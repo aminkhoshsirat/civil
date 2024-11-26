@@ -78,7 +78,7 @@ class ProjectImage(models.Model):
 class Coworking(BaseModel):
     title = models.CharField(max_length=100)
     slug = models.SlugField(unique=False, null=True, blank=True)
-    content = models.TextField()
+    content = RichTextField()
     illustration = models.TextField(null=True, blank=True)
     characteristic = models.TextField(null=True, blank=True)
     coworker_opinion = models.TextField(null=True, blank=True)
