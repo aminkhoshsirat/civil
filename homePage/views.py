@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect
 from .models import Project, Coworking, Category, LateralSys, GravitySys
-from django.shortcuts import get_object_or_404, redirect, reverse
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -13,16 +13,17 @@ def index(request):
 def detail(request, id:int, title:str):
     project = get_object_or_404(Project.objects.prefetch_related('images'),id=id)
     related_projects = Project.objects.filter(category=project.category).exclude(id=project.id)[:4]
+
     context = {'Project' : project, 'related_projects': related_projects}
     return render(request,"detail.html", context)
 
-def project_list(request):
-    projects = Project.objects.prefetch_related('images')  # Optimize query
-    return render(request, 'project_list.html', {'Project': projects})
+def coworking_detail(request, id: int, title: str):
+    coworking = get_object_or_404(Coworking.objects.prefetch_related('images'), id=id, slug=title)
+    related_coworkings = Coworking.objects.filter(category=coworking.category).exclude(id=coworking.id)[:4]
 
-# def detail(request, id, title):
-#     project = get_object_or_404(Project.objects.prefetch_related('images'), id=id, title=title)
-#     return render(request, 'detail.html', {'Projects': project})
+    context = {'Coworking' : coworking, 'related_coworkings': related_coworkings}
+    return render(request,"coworkings_detail.html", context)
+
 
 def store(request):
     # Fetch categories from the database
