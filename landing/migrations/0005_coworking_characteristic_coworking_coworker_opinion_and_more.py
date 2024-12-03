@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('homePage', '0004_project_characteristic_project_employer_opinion_and_more'),
+        ('landing', '0004_project_characteristic_project_employer_opinion_and_more'),
     ]
 
     operations = [
@@ -37,7 +37,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('image', models.ImageField(upload_to='coworking_images/')),
                 ('caption', models.CharField(blank=True, max_length=200, null=True)),
-                ('coworking', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='images', to='homePage.coworking')),
+                ('coworking', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='images', to='landing.coworking')),
             ],
         ),
     ]

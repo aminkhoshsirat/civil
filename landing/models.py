@@ -65,7 +65,7 @@ class Project(BaseModel):
 
     def get_absolute_url(self):
         from django.urls import reverse
-        return reverse("homePage:detail", kwargs={"id": self.id, "title": self.slug})
+        return reverse("landing:detail", kwargs={"id": self.id, "title": self.slug})
 
 class ProjectImage(models.Model):
     project = models.ForeignKey(Project, related_name='images', on_delete=models.CASCADE)
@@ -95,7 +95,7 @@ class Coworking(BaseModel):
 
     def get_absolute_url(self):
         from django.urls import reverse
-        return reverse("homePage:coworking_detail", kwargs={"id": self.id, "title": self.slug})
+        return reverse("landing:coworking_detail", kwargs={"id": self.id, "title": self.slug})
 
 class CoworkingImage(models.Model):
     coworking = models.ForeignKey(Coworking, related_name='images', on_delete=models.CASCADE)

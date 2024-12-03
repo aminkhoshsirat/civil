@@ -185,3 +185,10 @@ fabric.properties
 .idea
 db.sqlite3
 /media/
+
+media/
+coworking_images/
+image/
+project_image/
+
+.env

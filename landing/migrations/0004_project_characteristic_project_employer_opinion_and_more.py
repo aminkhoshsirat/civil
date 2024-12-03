@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('homePage', '0003_alter_project_content'),
+        ('landing', '0003_alter_project_content'),
     ]
 
     operations = [

@@ -7,7 +7,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('homePage', '0002_alter_projectimage_image'),
+        ('landing', '0002_alter_projectimage_image'),
     ]
 
     operations = [

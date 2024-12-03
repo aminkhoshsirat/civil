@@ -4,11 +4,12 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
 
 
-# Create your views here.
 def index(request):
-    project = Project.objects.all()
-    coworking = Coworking.objects.all()
-    return render(request,"index.html", {'Project':project, 'Coworking':coworking})
+    project = Project.objects.prefetch_related('images')  # Adjust 'images' to the related_name for Project images
+    coworking = Coworking.objects.prefetch_related('images', 'category')  # Prefetch images and category for Coworking
+    return render(request, "index.html", {'Project': project, 'Coworking': coworking})
+
+
 
 def detail(request, id:int, title:str):
     project = get_object_or_404(Project.objects.prefetch_related('images'),id=id)

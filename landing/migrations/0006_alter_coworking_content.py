@@ -7,7 +7,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('homePage', '0005_coworking_characteristic_coworking_coworker_opinion_and_more'),
+        ('landing', '0005_coworking_characteristic_coworking_coworker_opinion_and_more'),
     ]
 
     operations = [

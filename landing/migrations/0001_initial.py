@@ -63,9 +63,9 @@ class Migration(migrations.Migration):
                 ('content', models.TextField()),
                 ('image', models.ImageField(upload_to='image/project')),
                 ('total_Area', models.FloatField(blank=True, null=True)),
-                ('category', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='homePage.category')),
-                ('gravity_loading_sys', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='homePage.gravitysys')),
-                ('lateral_loading_sys', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='homePage.lateralsys')),
+                ('category', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='landing.category')),
+                ('gravity_loading_sys', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='landing.gravitysys')),
+                ('lateral_loading_sys', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='landing.lateralsys')),
             ],
             options={
                 'abstract': False,
@@ -77,7 +77,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('image', models.ImageField(upload_to='image/project/')),
                 ('caption', models.CharField(blank=True, max_length=200, null=True)),
-                ('project', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='images', to='homePage.project')),
+                ('project', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='images', to='landing.project')),
             ],
         ),
         migrations.CreateModel(
@@ -90,7 +90,7 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(max_length=100)),
                 ('content', models.TextField()),
                 ('image', models.ImageField(upload_to='image/coworking')),
-                ('category', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='homePage.category')),
+                ('category', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='landing.category')),
             ],
             options={
                 'abstract': False,

@@ -2,3 +2,5 @@ Django==4.2.11
 typing_extensions==4.12.2
 pillow==11.0.0
 requests~=2.32.3
+django-ckeditor~=6.7.1
+python-decouple==3.8
