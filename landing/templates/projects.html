@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Index{% endblock title %}
+{% block content %}
+
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+
+                    <!-- section title -->
+					<div class="section-nav" id="projects" dir="rtl" style="text-align: justify;">
+						<h3 class="title">پروژه های شاخص</h3>
+						<p style="line-height: 1.8; font-size: 18px;">
+
+						</p>
+					</div>
+					<!-- /section title -->
+                  </div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+
+<hr>
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+
+                    <div class="col-md-5">
+                        <h1>proj</h1>
+                        <img src=" {% static './img/SteelStructure01.png' %}" alt="">
+                    </div>
+
+                    <div class="col-md-7">
+                        <h1>descriptions</h1>
+						<p style="line-height: 1.8; font-size: 18px;">
+                            این پروژه در منطقه 22 در سال 99 و براساس ویرایش 92 آیین نامه بتن طراحی شده است.
+                            این پروژه در منطقه 22 در سال 99 و براساس ویرایش 92 آیین نامه بتن طراحی شده است.
+                            این پروژه در منطقه 22 در سال 99 و براساس ویرایش 92 آیین نامه بتن طراحی شده است.
+                            این پروژه در منطقه 22 در سال 99 و براساس ویرایش 92 آیین نامه بتن طراحی شده است.
+                            این پروژه در منطقه 22 در سال 99 و براساس ویرایش 92 آیین نامه بتن طراحی شده است.
+                            این پروژه در منطقه 22 در سال 99 و براساس ویرایش 92 آیین نامه بتن طراحی شده است.
+						</p>
+                    </div>
+
+                </div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+
+<hr>
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+
+                    <div class="col-md-7">
+                        <h1>descriptions</h1>
+                            <p style="line-height: 1.8; font-size: 18px;">
+                            این پروژه در منطقه 22 در سال 99 و براساس ویرایش 92 آیین نامه بتن طراحی شده است.
+                            این پروژه در منطقه 22 در سال 99 و براساس ویرایش 92 آیین نامه بتن طراحی شده است.
+                            این پروژه در منطقه 22 در سال 99 و براساس ویرایش 92 آیین نامه بتن طراحی شده است.
+                            این پروژه در منطقه 22 در سال 99 و براساس ویرایش 92 آیین نامه بتن طراحی شده است.
+                            این پروژه در منطقه 22 در سال 99 و براساس ویرایش 92 آیین نامه بتن طراحی شده است.
+                            این پروژه در منطقه 22 در سال 99 و براساس ویرایش 92 آیین نامه بتن طراحی شده است.
+						    </p>
+                    </div>
+
+                    <div class="col-md-5">
+                        <h1>proj</h1>
+                        <img src=" {% static './img/SteelStructure01.png' %}" alt="">
+                    </div>
+
+                </div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+
+<hr>
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+
+					<!-- project tab & slick -->
+					<div class="col-md-12">
+						<div class="row">
+							<div class="project-tabs">
+								<!-- tab -->
+								<div id="tab1" class="tab-pane active">
+									<div class="project-slick" data-nav="#slick-nav-1">
+										{% for project in Project %}
+											<!-- project -->
+											<div class="project">
+												<div class="project-img">
+													<img src=" {{project.image.url}}" alt="">
+												</div>
+												<div class="project-body">
+													<p class="project-category">{{ project.category }}</p>
+													<h3 class="project-name"><a href="{{ project.get_absolute_url }}">{{ project.title }}</a></h3>
+												</div>
+											</div>
+											<!-- /project -->
+										{% endfor %}
+									</div>
+									<div id="slick-nav-1" class="project-slick-nav"></div>
+								</div>
+								<!-- /tab -->
+							</div>
+						</div>
+					</div>
+					<!-- project tab & slick -->
+
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+
+
+{% endblock content %}

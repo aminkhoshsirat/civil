@@ -2,13 +2,13 @@ from .models import Project, Coworking, Category, LateralSys, GravitySys
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
+from django.db.models import Q
 
 
 def index(request):
     project = Project.objects.prefetch_related('images')  # Adjust 'images' to the related_name for Project images
     coworking = Coworking.objects.prefetch_related('images', 'category')  # Prefetch images and category for Coworking
     return render(request, "index.html", {'Project': project, 'Coworking': coworking})
-
 
 
 def detail(request, id:int, title:str):
@@ -91,3 +91,22 @@ def store(request):
     }
     return render(request, "store.html", context)
 
+
+def search(request):
+    query = request.GET.get('q', '')
+    projects = Project.objects.filter(
+        Q(title__icontains=query) |
+        Q(category__title__icontains=query) |
+        Q(content__icontains=query)
+    ).distinct() if query else Project.objects.none()
+
+    # Paginate results
+    paginator = Paginator(projects, 9)  # 9 projects per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'search.html', {'projects': page_obj, 'query': query})
+
+def projects(request):
+    project = Project.objects.prefetch_related('images')
+    return render(request, "projects.html", {'Project': project})

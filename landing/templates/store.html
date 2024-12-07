@@ -27,82 +27,83 @@
 		</div>
 		<!-- /BREADCRUMB -->
 
+		<!-- Main (Projects & filters) -->
+		<div class="row">
+			<!-- Left Section: Projects (9 Columns) -->
+			<div class="col-md-9">
 
-	<!-- Main (Projects & filters) -->
-    <div class="row">
-        <!-- Left Section: Projects (9 Columns) -->
-        <div class="col-md-9">
-
-            <div class="row">
-                <!-- Project Cards: 3 Columns per Project -->
-                <div class="col-md-4">
-                    <!-- Project Content -->
-					<div class="container">
-						<div class="row">
-							<!-- Left Section: Projects -->
-							<div class="col-md-9">
-								<div class="row">
-									{% for project in Project %}
-										<div class="col-md-4">
-											<!-- project -->
-											<div class="project">
-												<div class="project-img">
-													<img src="{{ project.image.url }}" alt="">
-												</div>
-												<div class="project-body">
-													<p class="project-category">{{ project.category }}</p>
-													<h3 class="project-name"><a href="{{ project.get_absolute_url }}">{{ project.title }}</a></h3>
-												</div>
-											</div>
-											<!-- /project -->
-										</div>
-										{% if forloop.counter|divisibleby:3 and not forloop.last %}
-									</div>
+				<div class="row">
+					<!-- Project Cards: 3 Columns per Project -->
+					<div class="col-md-4">
+						<!-- Project Content -->
+						<div class="container">
+							<div class="row">
+								<!-- Left Section: Projects -->
+								<div class="col-md-9">
 									<div class="row">
-										{% endif %}
-									{% endfor %}
-								</div>
-										<!-- Pagination -->
-										<div class="row">
-											<nav aria-label="Page navigation example">
-												<div class="pagination-wrapper">
-													<ul class="pagination justify-content-center">
-														<!-- Check for previous page -->
-														{% if page_obj.has_previous %}
-															<li class="page-item">
-																<a class="page-link" href="?page={{ page_obj.previous_page_number }}&{{ query_string }}" aria-label="Previous">
-																	<span aria-hidden="true">&laquo;</span>
-																</a>
-															</li>
-														{% endif %}
-
-														<!-- Loop through page range -->
-														{% for num in page_obj.paginator.page_range %}
-															<li class="page-item {% if page_obj.number == num %}active{% endif %}">
-																<a class="page-link" href="?page={{ num }}&{{ query_string }}">{{ num }}</a>
-															</li>
-														{% endfor %}
-
-														<!-- Check for next page -->
-														{% if page_obj.has_next %}
-															<li class="page-item">
-																<a class="page-link" href="?page={{ page_obj.next_page_number }}&{{ query_string }}" aria-label="Next">
-																	<span aria-hidden="true">&raquo;</span>
-																</a>
-															</li>
-														{% endif %}
-													</ul>
+										{% for project in Project %}
+											<div class="col-md-4">
+												<!-- project -->
+												<div class="project">
+													<div class="project-img">
+														<img src="{{ project.image.url }}" alt="">
+													</div>
+													<div class="project-body">
+														<p class="project-category">{{ project.category }}</p>
+														<h3 class="project-name"><a href="{{ project.get_absolute_url }}">{{ project.title }}</a></h3>
+													</div>
 												</div>
-											</nav>
-										</div>
-								<!-- /Pagination -->
+												<!-- /project -->
+											</div>
+											{% if forloop.counter|divisibleby:3 and not forloop.last %}
+											</div>
+												<div class="row">
+													{% endif %}
+												{% endfor %}
+												</div>
+											<!-- Pagination -->
+											<div class="row">
+												<nav aria-label="Page navigation example">
+													<div class="pagination-wrapper">
+														<ul class="pagination justify-content-center">
+															<!-- Check for previous page -->
+															{% if page_obj.has_previous %}
+																<li class="page-item">
+																	<a class="page-link" href="?page={{ page_obj.previous_page_number }}&{{ query_string }}" aria-label="Previous">
+																		<span aria-hidden="true">&laquo;</span>
+																	</a>
+																</li>
+															{% endif %}
+
+															<!-- Loop through page range -->
+															{% for num in page_obj.paginator.page_range %}
+																<li class="page-item {% if page_obj.number == num %}active{% endif %}">
+																	<a class="page-link" href="?page={{ num }}&{{ query_string }}">{{ num }}</a>
+																</li>
+															{% endfor %}
+
+															<!-- Check for next page -->
+															{% if page_obj.has_next %}
+																<li class="page-item">
+																	<a class="page-link" href="?page={{ page_obj.next_page_number }}&{{ query_string }}" aria-label="Next">
+																		<span aria-hidden="true">&raquo;</span>
+																	</a>
+																</li>
+															{% endif %}
+														</ul>
+													</div>
+												</nav>
+											</div>
+									<!-- /Pagination -->
+								</div>
 							</div>
 						</div>
 					</div>
-                </div>
-                <!-- Repeat for other projects -->
-            </div>
-        </div>
+					<!-- Repeat for other projects -->
+				</div>
+			</div>
+
+
 
         <!-- Right Section: Filters (3 Columns) -->
         <div class="col-md-3" dir="rtl">

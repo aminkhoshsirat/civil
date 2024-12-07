@@ -63,19 +63,21 @@
 						<!-- SEARCH BAR -->
 						<div class="col-md-5" dir="rtl">
 							<div class="header-search">
-								<form>
-									<button class="search-btn">جستجو</button>
-									<input class="input" placeholder="...">
-									<select class="input-select">
+								<form id="search-form" method="GET" action="{% url 'landing:search' %}">
+									<button class="search-btn" type="submit">جستجو</button>
+									<input type="text" name="q" class="input" id="search-input" placeholder="..." autocomplete="off">
+									<select class="input-select" id="category-select">
 										<option value="0">همه دسته ها</option>
 										<option value="1">سازه های فولادی</option>
 										<option value="2">سازه های بتن آرمه</option>
 										<option value="3">سازه های صنعتی</option>
 									</select>
 								</form>
+								<div id="search-results" style="position: absolute; background: white; z-index: 1000; width: 100%; border: 1px solid #ddd;"></div>
 							</div>
 						</div>
 						<!-- /SEARCH BAR -->
+
 
 						<!-- ACCOUNT -->
 						<div class="col-md-5 clearfix" dir="rtl">
@@ -85,7 +87,7 @@
 											<li ><a href="#contact">تماس با من</a></li>
 											<li><a href="#mentoring">منتورینگ</a></li>
 											<li><a href="#collaboration">همکاری در طرح</a></li>
-											<li><a href="#projects">پروژه‌ها</a></li>
+											<li><a href="{% url 'landing:projects' %}">پروژه‌ها</a></li>
 											<li class="active"><a href="{% url 'landing:index' %}">خانه</a></li>
 										</ul>
 										<!-- /NAV -->
@@ -150,9 +152,9 @@
 							<div class="footer">
 								<h3 class="footer-title">دسته بندی ها</h3>
 								<ul class="footer-links">
-									<li><a href="#">سازه های فولادی</a></li>
-									<li><a href="#">سازه های بتن آرمه</a></li>
-									<li><a href="#">سازه های صنعتی</a></li>
+									<li><a href="{% url 'landing:store' %}?category=سازه های فولادی">سازه های فولادی</a></li>
+									<li><a href="{% url 'landing:store' %}?category=سازه های بتن آرمه">سازه های بتن آرمه</a></li>
+									<li><a href="{% url 'landing:store' %}?category=سازه های صنعتی">سازه های صنعتی</a></li>
 								</ul>
 							</div>
 						</div>
@@ -174,9 +176,9 @@
 							<div class="footer">
 								<h3 class="footer-title">خدمات ما</h3>
 								<ul class="footer-links">
-									<li><a href="#">طراحی سازه</a></li>
-									<li><a href="#">همکاری در طرح</a></li>
-									<li><a href="#">منتورینگ</a></li>
+									<li><a href="#projects">طراحی سازه</a></li>
+									<li><a href="#collaboration">همکاری در طرح</a></li>
+									<li><a href="#mentoring">منتورینگ</a></li>
 								</ul>
 							</div>
 						</div>
