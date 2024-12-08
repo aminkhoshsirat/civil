@@ -10,4 +10,7 @@ urlpatterns = [
     path('coworkings_detail/<int:id>/<slug:title>/', views.coworking_detail, name='coworking_detail'),
     path('search/', views.search, name='search'),
     path('projects/', views.projects, name='projects'),
+    path('coworkings/', views.coworkings, name='coworkings'),
+    path('mentoring/', views.mentoring, name='mentoring'),
+    path('contact_us/', views.contact_us, name='contact_us'),
 ]

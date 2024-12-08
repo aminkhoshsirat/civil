@@ -10,7 +10,6 @@ def index(request):
     coworking = Coworking.objects.prefetch_related('images', 'category')  # Prefetch images and category for Coworking
     return render(request, "index.html", {'Project': project, 'Coworking': coworking})
 
-
 def detail(request, id:int, title:str):
     project = get_object_or_404(Project.objects.prefetch_related('images'),id=id)
     related_projects = Project.objects.filter(category=project.category).exclude(id=project.id)[:4]
@@ -24,7 +23,6 @@ def coworking_detail(request, id: int, title: str):
 
     context = {'Coworking' : coworking, 'related_coworkings': related_coworkings}
     return render(request,"coworkings_detail.html", context)
-
 
 def store(request):
     # Fetch categories from the database
@@ -91,7 +89,6 @@ def store(request):
     }
     return render(request, "store.html", context)
 
-
 def search(request):
     query = request.GET.get('q', '')
     projects = Project.objects.filter(
@@ -109,4 +106,36 @@ def search(request):
 
 def projects(request):
     project = Project.objects.prefetch_related('images')
-    return render(request, "projects.html", {'Project': project})
+    # Filter projects containing 'پروژه شاخص' in the content field
+    featured_projects = Project.objects.filter(content__icontains='پروژه شاخص')
+
+    # Paginate the filtered projects
+    paginator = Paginator(featured_projects, 3)  # Show 3 projects per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    # Pass only 'page_obj' to the template for paginated results
+    context = {'Project': project ,'page_obj': page_obj}
+    return render(request, 'projects.html', context)
+
+def coworkings(request):
+    coworking = Coworking.objects.prefetch_related('images', 'category')
+    # Filter projects containing 'پروژه شاخص' in the content field
+    featured_coworking = Coworking.objects.filter(content__icontains='پروژه شاخص')
+
+    # Paginate the filtered projects
+    paginator = Paginator(featured_coworking, 3)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    # Pass only 'page_obj' to the template for paginated results
+    context = {'Coworking': coworking ,'page_obj': page_obj}
+    return render(request, 'coworkings.html', context)
+
+def mentoring(request):
+    project = Project.objects.prefetch_related('images')
+    coworking = Coworking.objects.prefetch_related('images', 'category')
+    return render(request, "mentoring.html", {'Project': project, 'Coworking': coworking})
+
+def contact_us(request):
+    return render(request, "contact_us.html")

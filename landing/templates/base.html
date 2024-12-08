@@ -84,9 +84,9 @@
 							<!-- NAVIGATION -->
 										<!-- NAV -->
 										<ul class="main-nav nav navbar-nav">
-											<li ><a href="#contact">تماس با من</a></li>
-											<li><a href="#mentoring">منتورینگ</a></li>
-											<li><a href="#collaboration">همکاری در طرح</a></li>
+											<li ><a href="{% url 'landing:contact_us' %}">تماس با من</a></li>
+											<li><a href="{% url 'landing:mentoring' %}">منتورینگ</a></li>
+											<li><a href="{% url 'landing:coworkings' %}">همکاری در طرح</a></li>
 											<li><a href="{% url 'landing:projects' %}">پروژه‌ها</a></li>
 											<li class="active"><a href="{% url 'landing:index' %}">خانه</a></li>
 										</ul>
@@ -176,9 +176,9 @@
 							<div class="footer">
 								<h3 class="footer-title">خدمات ما</h3>
 								<ul class="footer-links">
-									<li><a href="#projects">طراحی سازه</a></li>
-									<li><a href="#collaboration">همکاری در طرح</a></li>
-									<li><a href="#mentoring">منتورینگ</a></li>
+									<li><a href="{% url 'landing:projects' %}">طراحی سازه</a></li>
+									<li><a href="{% url 'landing:coworkings' %}">همکاری در طرح</a></li>
+									<li><a href="{% url 'landing:mentoring' %}">منتورینگ</a></li>
 								</ul>
 							</div>
 						</div>
@@ -199,6 +199,7 @@
 		<script src="{% static 'js/nouislider.min.js' %}"></script>
 		<script src="{% static 'js/jquery.zoom.min.js' %}"></script>
 		<script src="{% static 'js/main.js' %}"></script>
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 		{% block scripts %}
 		{% endblock scripts %}
 	</body>
