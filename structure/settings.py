@@ -41,7 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'structure',
-    'landing',
+    'Structure_Design',
+    'BIM',
+    'project_management',
+    'Retrofit',
+    'Software',
     'ckeditor',
 ]
 
@@ -60,7 +64,7 @@ ROOT_URLCONF = 'structure.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
