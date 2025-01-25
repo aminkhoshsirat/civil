@@ -41,11 +41,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'structure',
-    'Structure_Design',
-    'BIM',
-    'project_management',
-    'Retrofit',
-    'Software',
+    'Apps.Home_Page',
+    'Apps.Structure_Design',
+    'Apps.BIM',
+    'Apps.project_management',
+    'Apps.Retrofit',
+    'Apps.Software',
+    'Apps.Users',
     'ckeditor',
 ]
 
