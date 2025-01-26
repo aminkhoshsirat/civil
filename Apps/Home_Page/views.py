@@ -8,7 +8,7 @@ from django.db.models import Q
 def index(request):
     project = Project.objects.prefetch_related('images')  # Adjust 'images' to the related_name for Project images
     coworking = Coworking.objects.prefetch_related('images', 'category')  # Prefetch images and category for Coworking
-    return render(request, "index.html", {'Project': project, 'Coworking': coworking})
+    return render(request, "Home_Page/index.html", {'Project': project, 'Coworking': coworking})
 
 def detail(request, id:int, title:str):
     project = get_object_or_404(Project.objects.prefetch_related('images'),id=id)
