@@ -24,25 +24,25 @@ class BaseModel(models.Model):
         self.save()
 
 # Create your models here.
-class Category(BaseModel):
+class STRCategory(BaseModel):
     title = models.CharField(max_length=100)
 
     def __str__(self):
         return self.title
 
-class GravitySys(BaseModel):
+class STRGravitySys(BaseModel):
     title = models.CharField(max_length=100)
 
     def __str__(self):
         return self.title
 
-class LateralSys(BaseModel):
+class STRLateralSys(BaseModel):
     title = models.CharField(max_length=100)
 
     def __str__(self):
         return self.title
 
-class Project(BaseModel):
+class STRProject(BaseModel):
     title = models.CharField(max_length=100)
     slug = models.SlugField(unique=False, null=True, blank=True)
     content = RichTextField()
@@ -50,10 +50,10 @@ class Project(BaseModel):
     characteristic = models.TextField(null=True, blank=True)
     employer_opinion = models.TextField(null=True, blank=True)
     image = models.ImageField(upload_to='image/project')
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
+    category = models.ForeignKey(STRCategory, on_delete=models.SET_NULL, null=True, blank=True)
     total_Area = models.FloatField(null=True, blank=True)
-    gravity_loading_sys = models.ForeignKey(GravitySys, on_delete=models.SET_NULL, null=True, blank=True)
-    lateral_loading_sys = models.ForeignKey(LateralSys, on_delete=models.SET_NULL, null=True, blank=True)
+    gravity_loading_sys = models.ForeignKey(STRGravitySys, on_delete=models.SET_NULL, null=True, blank=True)
+    lateral_loading_sys = models.ForeignKey(STRLateralSys, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -67,15 +67,15 @@ class Project(BaseModel):
         from django.urls import reverse
         return reverse("Structure_Design:detail", kwargs={"id": self.id, "title": self.slug})
 
-class ProjectImage(models.Model):
-    project = models.ForeignKey(Project, related_name='images', on_delete=models.CASCADE)
+class STRProjectImage(models.Model):
+    project = models.ForeignKey(STRProject, related_name='images', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='project_images/')
     caption = models.CharField(max_length=200, blank=True, null=True)
 
     def __str__(self):
         return f"Image for {self.project.title}"
 
-class Coworking(BaseModel):
+class STRCoworking(BaseModel):
     title = models.CharField(max_length=100)
     slug = models.SlugField(unique=False, null=True, blank=True)
     content = RichTextField()
@@ -83,7 +83,7 @@ class Coworking(BaseModel):
     characteristic = models.TextField(null=True, blank=True)
     coworker_opinion = models.TextField(null=True, blank=True)
     image = models.ImageField(upload_to='image/coworking')
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
+    category = models.ForeignKey(STRCategory, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -97,8 +97,8 @@ class Coworking(BaseModel):
         from django.urls import reverse
         return reverse("Structure_Design:coworking_detail", kwargs={"id": self.id, "title": self.slug})
 
-class CoworkingImage(models.Model):
-    coworking = models.ForeignKey(Coworking, related_name='images', on_delete=models.CASCADE)
+class STRCoworkingImage(models.Model):
+    coworking = models.ForeignKey(STRCoworking, related_name='images', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='coworking_images/')
     caption = models.CharField(max_length=200, blank=True, null=True)
 

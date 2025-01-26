@@ -1,4 +1,4 @@
-from .models import Project, Coworking, Category, LateralSys, GravitySys
+from .models import RetroProject, RetroCoworking, RetroCategory, RetroLateralSys, RetroGravitySys
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
@@ -6,31 +6,31 @@ from django.db.models import Q
 
 
 def index(request):
-    project = Project.objects.prefetch_related('images')  # Adjust 'images' to the related_name for Project images
-    coworking = Coworking.objects.prefetch_related('images', 'category')  # Prefetch images and category for Coworking
+    project = RetroProject.objects.prefetch_related('images')  # Adjust 'images' to the related_name for Project images
+    coworking = RetroCoworking.objects.prefetch_related('images', 'category')  # Prefetch images and category for Coworking
     return render(request, "Retrofit/index.html", {'Project': project, 'Coworking': coworking})
 
 def detail(request, id:int, title:str):
-    project = get_object_or_404(Project.objects.prefetch_related('images'),id=id)
-    related_projects = Project.objects.filter(category=project.category).exclude(id=project.id)[:4]
+    project = get_object_or_404(RetroProject.objects.prefetch_related('images'),id=id)
+    related_projects = RetroProject.objects.filter(category=project.category).exclude(id=project.id)[:4]
 
     context = {'Project' : project, 'related_projects': related_projects}
     return render(request,"detail.html", context)
 
 def coworking_detail(request, id: int, title: str):
-    coworking = get_object_or_404(Coworking.objects.prefetch_related('images'), id=id, slug=title)
-    related_coworkings = Coworking.objects.filter(category=coworking.category).exclude(id=coworking.id)[:4]
+    coworking = get_object_or_404(RetroCoworking.objects.prefetch_related('images'), id=id, slug=title)
+    related_coworkings = RetroCoworking.objects.filter(category=coworking.category).exclude(id=coworking.id)[:4]
 
     context = {'Coworking' : coworking, 'related_coworkings': related_coworkings}
     return render(request,"coworkings_detail.html", context)
 
 def store(request):
     # Fetch categories from the database
-    categories = Category.objects.all()
+    categories = RetroCategory.objects.all()
 
     # Retrieve Gravity, Lateral Systems from the database
-    gravity_systems = GravitySys.objects.all()
-    lateral_systems = LateralSys.objects.all()
+    gravity_systems = RetroGravitySys.objects.all()
+    lateral_systems = RetroLateralSys.objects.all()
 
     # Get selected categories, floor system, and other filters
     selected_categories = request.GET.getlist('category')
@@ -40,7 +40,7 @@ def store(request):
     max_area = request.GET.get('max_area')
 
     # Base query for projects
-    project_query = Project.objects.all()
+    project_query = RetroProject.objects.all()
 
     # Filter by selected categories
     if selected_categories:
@@ -91,11 +91,11 @@ def store(request):
 
 def search(request):
     query = request.GET.get('q', '')
-    projects = Project.objects.filter(
+    projects = RetroProject.objects.filter(
         Q(title__icontains=query) |
         Q(category__title__icontains=query) |
         Q(content__icontains=query)
-    ).distinct() if query else Project.objects.none()
+    ).distinct() if query else RetroProject.objects.none()
 
     # Paginate results
     paginator = Paginator(projects, 9)  # 9 projects per page
@@ -105,9 +105,9 @@ def search(request):
     return render(request, 'search.html', {'projects': page_obj, 'query': query})
 
 def projects(request):
-    project = Project.objects.prefetch_related('images')
+    project = RetroProject.objects.prefetch_related('images')
     # Filter projects containing 'پروژه شاخص' in the content field
-    featured_projects = Project.objects.filter(content__icontains='پروژه شاخص')
+    featured_projects = RetroProject.objects.filter(content__icontains='پروژه شاخص')
 
     # Paginate the filtered projects
     paginator = Paginator(featured_projects, 3)  # Show 3 projects per page
@@ -119,9 +119,9 @@ def projects(request):
     return render(request, 'projects.html', context)
 
 def coworkings(request):
-    coworking = Coworking.objects.prefetch_related('images', 'category')
+    coworking = RetroCoworking.objects.prefetch_related('images', 'category')
     # Filter projects containing 'پروژه شاخص' in the content field
-    featured_coworking = Coworking.objects.filter(content__icontains='پروژه شاخص')
+    featured_coworking = RetroCoworking.objects.filter(content__icontains='پروژه شاخص')
 
     # Paginate the filtered projects
     paginator = Paginator(featured_coworking, 3)
@@ -133,8 +133,8 @@ def coworkings(request):
     return render(request, 'coworkings.html', context)
 
 def mentoring(request):
-    project = Project.objects.prefetch_related('images')
-    coworking = Coworking.objects.prefetch_related('images', 'category')
+    project = RetroProject.objects.prefetch_related('images')
+    coworking = RetroCoworking.objects.prefetch_related('images', 'category')
     return render(request, "mentoring.html", {'Project': project, 'Coworking': coworking})
 
 def contact_us(request):

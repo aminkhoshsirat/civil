@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Project, ProjectImage, Coworking, CoworkingImage, Category, LateralSys, GravitySys
+from .models import BIMProject, BIMProjectImage, BIMCoworking, BIMCoworkingImage, BIMCategory, BIMLateralSys, BIMGravitySys
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -13,14 +13,14 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class ProjectImageInline(admin.TabularInline):
-    model = ProjectImage
+    model = BIMProjectImage
     extra = 1
 
-@admin.register(ProjectImage)
+@admin.register(BIMProjectImage)
 class ProjectImageAdmin(admin.ModelAdmin):
     list_display = ('project', 'caption')
 
-@admin.register(Project)
+@admin.register(BIMProject)
 class ProjectAdmin(admin.ModelAdmin):
     list_display = ('title', 'category', 'created_at', 'updated_at')
     search_fields = ('title', 'content')
@@ -29,19 +29,19 @@ class ProjectAdmin(admin.ModelAdmin):
 
 
 class CoworkImageInline(admin.TabularInline):
-    model = CoworkingImage
+    model = BIMCoworkingImage
     extra = 1
 
-@admin.register(CoworkingImage)
+@admin.register(BIMCoworkingImage)
 class CoworkingImageAdmin(admin.ModelAdmin):
     list_display = ('coworking', 'caption')
 
-@admin.register(Coworking)
+@admin.register(BIMCoworking)
 class CoworkingAdmin(admin.ModelAdmin):
     list_display = ('title', 'category', 'created_at', 'updated_at')
     search_fields = ('title', 'content')
     inlines = [CoworkImageInline]
 
-admin.site.register(Category, CategoryAdmin)
-admin.site.register(GravitySys)
-admin.site.register(LateralSys)
+admin.site.register(BIMCategory, CategoryAdmin)
+admin.site.register(BIMGravitySys)
+admin.site.register(BIMLateralSys)

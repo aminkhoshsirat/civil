@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Project, ProjectImage, Coworking, CoworkingImage, Category, LateralSys, GravitySys
+from .models import RetroProject, RetroProjectImage, RetroCoworking, RetroCoworkingImage, RetroCategory, RetroLateralSys, RetroGravitySys
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -13,14 +13,14 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class ProjectImageInline(admin.TabularInline):
-    model = ProjectImage
+    model = RetroProjectImage
     extra = 1
 
-@admin.register(ProjectImage)
+@admin.register(RetroProjectImage)
 class ProjectImageAdmin(admin.ModelAdmin):
     list_display = ('project', 'caption')
 
-@admin.register(Project)
+@admin.register(RetroProject)
 class ProjectAdmin(admin.ModelAdmin):
     list_display = ('title', 'category', 'created_at', 'updated_at')
     search_fields = ('title', 'content')
@@ -29,19 +29,19 @@ class ProjectAdmin(admin.ModelAdmin):
 
 
 class CoworkImageInline(admin.TabularInline):
-    model = CoworkingImage
+    model = RetroCoworkingImage
     extra = 1
 
-@admin.register(CoworkingImage)
+@admin.register(RetroCoworkingImage)
 class CoworkingImageAdmin(admin.ModelAdmin):
     list_display = ('coworking', 'caption')
 
-@admin.register(Coworking)
+@admin.register(RetroCoworking)
 class CoworkingAdmin(admin.ModelAdmin):
     list_display = ('title', 'category', 'created_at', 'updated_at')
     search_fields = ('title', 'content')
     inlines = [CoworkImageInline]
 
-admin.site.register(Category, CategoryAdmin)
-admin.site.register(GravitySys)
-admin.site.register(LateralSys)
+admin.site.register(RetroCategory, CategoryAdmin)
+admin.site.register(RetroGravitySys)
+admin.site.register(RetroLateralSys)

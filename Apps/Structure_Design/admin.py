@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Project, ProjectImage, Coworking, CoworkingImage, Category, LateralSys, GravitySys
+from .models import STRProject, STRProjectImage, STRCoworking, STRCoworkingImage, STRCategory, STRLateralSys, STRGravitySys
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -13,14 +13,14 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class ProjectImageInline(admin.TabularInline):
-    model = ProjectImage
+    model = STRProjectImage
     extra = 1
 
-@admin.register(ProjectImage)
+@admin.register(STRProjectImage)
 class ProjectImageAdmin(admin.ModelAdmin):
     list_display = ('project', 'caption')
 
-@admin.register(Project)
+@admin.register(STRProject)
 class ProjectAdmin(admin.ModelAdmin):
     list_display = ('title', 'category', 'created_at', 'updated_at')
     search_fields = ('title', 'content')
@@ -29,19 +29,19 @@ class ProjectAdmin(admin.ModelAdmin):
 
 
 class CoworkImageInline(admin.TabularInline):
-    model = CoworkingImage
+    model = STRCoworkingImage
     extra = 1
 
-@admin.register(CoworkingImage)
+@admin.register(STRCoworkingImage)
 class CoworkingImageAdmin(admin.ModelAdmin):
     list_display = ('coworking', 'caption')
 
-@admin.register(Coworking)
+@admin.register(STRCoworking)
 class CoworkingAdmin(admin.ModelAdmin):
     list_display = ('title', 'category', 'created_at', 'updated_at')
     search_fields = ('title', 'content')
     inlines = [CoworkImageInline]
 
-admin.site.register(Category, CategoryAdmin)
-admin.site.register(GravitySys)
-admin.site.register(LateralSys)
+admin.site.register(STRCategory, CategoryAdmin)
+admin.site.register(STRGravitySys)
+admin.site.register(STRLateralSys)
