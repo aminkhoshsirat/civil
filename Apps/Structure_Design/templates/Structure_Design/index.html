@@ -180,41 +180,33 @@
 					</div>
 
 					<div class="container">
-						<!-- project Tab & Slick -->
-						<div class="row">
-							<div class="col-md-12">
-								<div class="project-tabs">
-									<!-- Tab -->
-									<div id="tab2" class="tab-pane active">
-										<div class="project-slick" data-nav="#slick-nav-3">
-											{% for coworking in STRCoworking %}
-												<!-- project -->
-												<div class="project">
-													<div class="project-img">
-														<img src="{{ coworking.image.url }}" alt="{{ project.title }}">
+						<!-- Project Tab & Slick -->
+							<div class="row">
+								<div class="col-md-12">
+									<div class="project-tabs">
+										<div id="tab2" class="tab-pane active">
+											<div class="project-slick" data-nav="#slick-nav-3">
+												{% for coworking in Coworking %}
+													<div class="project">
+														<div class="project-img">
+															<!-- Use coworking.image.url -->
+															<img src="{{ coworking.image.url }}" alt="{{ coworking.title }}">
+														</div>
+														<div class="project-body">
+															<p class="project-category">{{ coworking.category }}</p>
+															<h3 class="project-name">
+																<a href="{{ coworking.get_absolute_url }}">{{ coworking.title }}</a>
+															</h3>
+														</div>
 													</div>
-													<div class="project-body">
-														<p class="project-category">{{ coworking.category }}</p>
-														<h3 class="project-name">
-															<a href="{{ coworking.get_absolute_url }}">{{ coworking.title }}</a>
-														</h3>
-													</div>
-												</div>
-												<!-- /project -->
-											{% endfor %}
-
-
-
-
+												{% endfor %}
+											</div>
+											<div id="slick-nav-3" class="project-slick-nav"></div>
 										</div>
-										<div id="slick-nav-3" class="project-slick-nav"></div>
 									</div>
-									<!-- /Tab -->
 								</div>
 							</div>
-						</div>
-						<!-- /project Tab & Slick -->
-
+						<!-- /Project Tab & Slick -->
 					</div>
 
 				</div>
@@ -238,7 +230,6 @@
 			</div>
 		</div>
 		<!-- /Mentoring -->
-
 
 		<!-- Contact Us Section -->
 		<section class="welcome-section" id="contact">

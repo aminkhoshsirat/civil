@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.text import slugify
 from ckeditor.fields import RichTextField
+from django.urls import reverse
 
 class BaseModelManager(models.Manager):
     def get_queryset(self):
@@ -64,8 +65,7 @@ class RetroProject(BaseModel):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        from django.urls import reverse
-        return reverse("Retrofit:detail", kwargs={"id": self.id, "title": self.slug})
+        return reverse('Retrofit:project_detail', args=[self.id])
 
 class RetroProjectImage(models.Model):
     project = models.ForeignKey(RetroProject, related_name='images', on_delete=models.CASCADE)

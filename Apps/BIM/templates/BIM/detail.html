@@ -14,8 +14,8 @@
 						<ul class="breadcrumb-tree">
 							<li><a href="#">خانه</a></li>
 							<li><a href="#">  دسته بندی ها</a></li>
-							<li><a href="#">  {{ Project.category }}</a></li>
-							<li class="active">   {{ Project.title }}</li>
+							<li><a href="#">  {{ BIMProject.category }}</a></li>
+							<li class="active">   {{ BIMProject.title }}</li>
 						</ul>
 					</div>
 				</div>
@@ -36,14 +36,14 @@
 					<div class="col-md-5 col-md-push-2">
 						<div id="project-main-img">
 							<!-- Main Project Image -->
-							{% if Project.image %}
+							{% if BIMProject.image %}
 							<div class="project-images">
 								<img src="{{ Project.image.url }}" alt="{{ Project.title }}">
 							</div>
 							{% endif %}
 
 							<!-- Additional Images -->
-							{% for image in Project.images.all %}
+							{% for image in BIMProject.images.all %}
 							<div class="project-images">
 								<img src="{{ image.image.url }}" alt="{{ Project.title }}">
 							</div>
@@ -56,14 +56,14 @@
 					<div class="col-md-2 col-md-pull-5">
 						<div id="project-imgs">
 							<!-- Main Project Image as First Thumbnail -->
-							{% if Project.image %}
+							{% if BIMProject.image %}
 							<div class="project-preview">
 								<img src="{{ Project.image.url }}" alt="{{ Project.title }}">
 							</div>
 							{% endif %}
 
 							<!-- Additional Thumbnails -->
-							{% for image in Project.images.all %}
+							{% for image in BIMProject.images.all %}
 							<div class="project-preview">
 								<img src="{{ image.image.url }}" alt="{{ Project.title }}">
 							</div>
@@ -75,9 +75,9 @@
 					<!-- project details -->
 					<div class="col-md-5" dir="rtl">
 						<div class="project-details">
-							<h2 class="project-name">{{ Project.title }}</h2>
+							<h2 class="project-name">{{ BIMProject.title }}</h2>
 
-							<p>{{ Project.content|safe }}</p>
+							<p>{{ BIMProject.content|safe }}</p>
 
 							<ul class="project-links" align="center">
 								<li></li>
@@ -108,7 +108,7 @@
 								<div id="tab1" class="tab-pane fade in active">
 									<div class="row">
 										<div class="col-md-12" dir="rtl">
-											<p>{{ Project.illustration }}</p>
+											<p>{{ BIMProject.illustration }}</p>
 										</div>
 									</div>
 								</div>
@@ -118,7 +118,7 @@
 								<div id="tab2" class="tab-pane fade in">
 									<div class="row">
 										<div class="col-md-12" dir="rtl">
-											<p>{{ Project.characteristic }}</p>
+											<p>{{ BIMProject.characteristic }}</p>
 										</div>
 									</div>
 								</div>
@@ -128,7 +128,7 @@
 								<div id="tab3" class="tab-pane fade in">
 									<div class="row">
 										<div class="col-md-12" dir="rtl">
-											<p>{{ Project.employer_opinion }}</p>
+											<p>{{ BIMProject.employer_opinion }}</p>
 										</div>
 									</div>
 								</div>

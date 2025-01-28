@@ -4,18 +4,54 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
 from django.db.models import Q
 
+from django.views.generic import TemplateView, DetailView
+from .models import BIMProject, BIMCoworking
 
-def index(request):
-    project = BIMProject.objects.prefetch_related('images')  # Adjust 'images' to the related_name for Project images
-    coworking = BIMCoworking.objects.prefetch_related('images', 'category')  # Prefetch images and category for Coworking
-    return render(request, "BIM/index.html", {'Project': project, 'Coworking': coworking})
 
-def detail(request, id:int, title:str):
-    project = get_object_or_404(BIMProject.objects.prefetch_related('images'),id=id)
-    related_projects = BIMProject.objects.filter(category=project.category).exclude(id=project.id)[:4]
+# def index(request):
+#     project = BIMProject.objects.prefetch_related('images')  # Adjust 'images' to the related_name for Project images
+#     coworking = BIMCoworking.objects.prefetch_related('images', 'category')  # Prefetch images and category for Coworking
+#     return render(request, "BIM/index.html", {'Project': project, 'Coworking': coworking})
 
-    context = {'Project' : project, 'related_projects': related_projects}
-    return render(request,"BIM/detail.html", context)
+
+
+class IndexView(TemplateView):
+    template_name = "BIM/index.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['BIMProject'] = BIMProject.objects.prefetch_related('images')
+        print(context['BIMProject'])
+
+        context['Coworking'] = BIMCoworking.objects.prefetch_related('images', 'category')
+        return context
+
+class ProjectDetailView(DetailView):
+    model = BIMProject
+    template_name = 'BIM/detail.html'
+    context_object_name = 'project'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# def detail(request, id:int, title:str):
+#     project = get_object_or_404(BIMProject.objects.prefetch_related('images'),id=id)
+#     related_projects = BIMProject.objects.filter(category=project.category).exclude(id=project.id)[:4]
+#
+#     context = {'Project' : project, 'related_projects': related_projects}
+#     return render(request,"BIM/detail.html", context)
 
 def coworking_detail(request, id: int, title: str):
     coworking = get_object_or_404(BIMCoworking.objects.prefetch_related('images'), id=id, slug=title)

@@ -84,22 +84,11 @@
 							<!-- NAVIGATION -->
 							<ul class="main-nav nav navbar-nav">
 
-								<!-- Major Item: نرم افزارها -->
+								<!-- Major Item: مدلسازی اطلاعات ساختمان -->
 								<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown">نرم افزارها <span class="caret"></span></a>
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">مدلسازی اطلاعات ساختمان <span class="caret"></span></a>
 									<ul class="dropdown-menu">
-										<li><a href="#">آیتم یک</a></li>
-										<li><a href="#">آیتم دو</a></li>
-										<li><a href="#">آیتم سه</a></li>
-										<li><a href="#">آیتم چهار</a></li>
-									</ul>
-								</li>
-
-								<!-- Major Item: مدیریت پروژه -->
-								<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown">مدیریت پروژه <span class="caret"></span></a>
-									<ul class="dropdown-menu">
-										<li><a href="#">آیتم یک</a></li>
+										<li><a href="{% url 'BIM:index' %}">خدمات مدلسازی اطلاعات ساختمان</a></li>
 										<li><a href="#">آیتم دو</a></li>
 										<li><a href="#">آیتم سه</a></li>
 										<li><a href="#">آیتم چهار</a></li>
@@ -110,18 +99,29 @@
 								<li class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown">بهسازی و مقاوم سازی <span class="caret"></span></a>
 									<ul class="dropdown-menu">
-										<li><a href="#">آیتم یک</a></li>
+										<li><a href="{% url 'Retrofit:index' %}">خدمات بهسازی و مقاوم سازی</a></li>
 										<li><a href="#">آیتم دو</a></li>
 										<li><a href="#">آیتم سه</a></li>
 										<li><a href="#">آیتم چهار</a></li>
 									</ul>
 								</li>
 
-								<!-- Major Item: مدلسازی اطلاعات ساختمان -->
+								<!-- Major Item: نرم افزارها -->
 								<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown">مدلسازی اطلاعات ساختمان <span class="caret"></span></a>
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">نرم افزارها <span class="caret"></span></a>
 									<ul class="dropdown-menu">
-										<li><a href="{% url 'BIM:index' %}">خدمات مدلسازی اطلاعات ساختمان</a></li>
+										<li><a href="{% url 'Software:index' %}">خدمات AEC</a></li>
+										<li><a href="#">نرم افزارها1</a></li>
+										<li><a href="#">نرم افزار 2</a></li>
+										<li><a href="#">نرم افزار 3</a></li>
+									</ul>
+								</li>
+
+								<!-- Major Item: مدیریت پروژه -->
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">مدیریت پروژه <span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li><a href="{% url 'project_management:index' %}">خدمات مدیریت پروژه</a></li>
 										<li><a href="#">آیتم دو</a></li>
 										<li><a href="#">آیتم سه</a></li>
 										<li><a href="#">آیتم چهار</a></li>
@@ -143,7 +143,6 @@
 								<li class="active">
 									<a href="{% url 'Home_Page:index' %}">خانه</a>
 								</li>
-
 							</ul>
 							<!-- /NAVIGATION -->
 						</div>
@@ -154,9 +153,7 @@
 						<div class="col-md-1">
 							<div class="header-logo">
 								<a href="{% url 'Home_Page:index' %}" class="logo">
-<!--									<img src=" {% static './img/logo.png' %}" alt="">-->
-									<img src="{% static 'img/logo.png' %}" alt="Logo">
-
+									<img src=" {% static './img/logo.png' %}" alt="">
 								</a>
 							</div>
 						</div>

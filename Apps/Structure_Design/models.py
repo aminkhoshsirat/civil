@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.text import slugify
 from ckeditor.fields import RichTextField
+from django.urls import reverse
 
 class BaseModelManager(models.Manager):
     def get_queryset(self):
@@ -64,8 +65,7 @@ class STRProject(BaseModel):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        from django.urls import reverse
-        return reverse("Structure_Design:detail", kwargs={"id": self.id, "title": self.slug})
+        return reverse('Structure_Design:project_detail', args=[self.id])
 
 class STRProjectImage(models.Model):
     project = models.ForeignKey(STRProject, related_name='images', on_delete=models.CASCADE)
@@ -96,6 +96,7 @@ class STRCoworking(BaseModel):
     def get_absolute_url(self):
         from django.urls import reverse
         return reverse("Structure_Design:coworking_detail", kwargs={"id": self.id, "title": self.slug})
+
 
 class STRCoworkingImage(models.Model):
     coworking = models.ForeignKey(STRCoworking, related_name='images', on_delete=models.CASCADE)
