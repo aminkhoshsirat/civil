@@ -65,10 +65,6 @@ class SoftProject(BaseModel):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        from django.urls import reverse
-        return reverse("Software:detail", kwargs={"id": self.id, "title": self.slug})
-
-    def get_absolute_url(self):
         return reverse('Software:project_detail', args=[self.id])
 
 class SoftProjectImage(models.Model):
