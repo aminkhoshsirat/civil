@@ -1,6 +1,4 @@
-from .models import BIMProject, BIMCoworking, BIMCategory, BIMLateralSys, BIMGravitySys
-from django.shortcuts import render, get_object_or_404, redirect, reverse
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from .models import *
 from django.http import JsonResponse
 from django.db.models import Q
 
@@ -8,29 +6,24 @@ from django.views.generic import TemplateView, DetailView
 from .models import BIMProject, BIMCoworking
 from django.views.generic.list import ListView
 
-# def index(request):
-#     project = BIMProject.objects.prefetch_related('images')  # Adjust 'images' to the related_name for Project images
-#     coworking = BIMCoworking.objects.prefetch_related('images', 'category')  # Prefetch images and category for Coworking
-#     return render(request, "BIM/index.html", {'Project': project, 'Coworking': coworking})
 
 
 
 class IndexView(TemplateView):
-    template_name = "BIM/index.html"
+    template_name = "bim/index.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['BIMProject'] = BIMProject.objects.all()
-
+        context['banners'] = BimBannerModel.objects.all()
         # Fetch coworking projects and include category
         context['Coworking'] = BIMCoworking.objects.select_related('category')
         return context
 
 
-
 class ProjectDetailView(DetailView):
     model = BIMProject
-    template_name = 'BIM/detail.html'
+    template_name = 'bim/detail.html'
     context_object_name = 'Project'
 
     def get_context_data(self, **kwargs):
@@ -43,7 +36,7 @@ class ProjectDetailView(DetailView):
 
 class CoworkingDetailView(DetailView):
     model = BIMCoworking
-    template_name = 'BIM/coworkings_detail.html'
+    template_name = 'bim/coworkings_detail.html'
     context_object_name = 'Coworking'
     slug_field = 'slug'
     slug_url_kwarg = 'title'
@@ -58,7 +51,7 @@ class CoworkingDetailView(DetailView):
 
 class StoreView(ListView):
     model = BIMProject
-    template_name = 'BIM/store.html'
+    template_name = 'bim/store.html'
     context_object_name = 'Project'
     paginate_by = 6
 
@@ -94,7 +87,7 @@ class StoreView(ListView):
 
 class SearchView(ListView):
     model = BIMProject
-    template_name = 'BIM/search.html'
+    template_name = 'bim/search.html'
     context_object_name = 'projects'
     paginate_by = 9
 
@@ -114,7 +107,7 @@ class SearchView(ListView):
 
 class ProjectsView(ListView):
     model = BIMProject
-    template_name = 'BIM/projects.html'
+    template_name = 'bim/projects.html'
     context_object_name = 'page_obj'
     paginate_by = 3
 
@@ -124,7 +117,7 @@ class ProjectsView(ListView):
 
 class CoworkingsView(ListView):
     model = BIMCoworking
-    template_name = 'BIM/coworkings.html'
+    template_name = 'bim/coworkings.html'
     context_object_name = 'page_obj'
     paginate_by = 3
 
@@ -137,7 +130,7 @@ class CoworkingsView(ListView):
 
 
 class MentoringView(TemplateView):
-    template_name = 'BIM/mentoring.html'
+    template_name = 'bim/mentoring.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -146,7 +139,7 @@ class MentoringView(TemplateView):
         return context
 
 class ContactUsView(TemplateView):
-    template_name = 'BIM/contact_us.html'
+    template_name = 'bim/contact_us.html'
 
 
 # def detail(request, id:int, title:str):
@@ -154,14 +147,14 @@ class ContactUsView(TemplateView):
 #     related_projects = BIMProject.objects.filter(category=project.category).exclude(id=project.id)[:4]
 #
 #     context = {'Project' : project, 'related_projects': related_projects}
-#     return render(request,"BIM/detail.html", context)
+#     return render(request,"bim/detail.html", context)
 
 # def coworking_detail(request, id: int, title: str):
 #     coworking = get_object_or_404(BIMCoworking.objects.prefetch_related('images'), id=id, slug=title)
 #     related_coworkings = BIMCoworking.objects.filter(category=coworking.category).exclude(id=coworking.id)[:4]
 #
 #     context = {'Coworking' : coworking, 'related_coworkings': related_coworkings}
-#     return render(request,"BIM/coworkings_detail.html", context)
+#     return render(request,"bim/coworkings_detail.html", context)
 #
 # def store(request):
 #     # Fetch categories from the database
@@ -226,7 +219,7 @@ class ContactUsView(TemplateView):
 #         'selected_lateral_system': selected_lateral_system,
 #         'query_string': query_params.urlencode(),  # Pass the query string to the template
 #     }
-#     return render(request, "BIM/store.html", context)
+#     return render(request, "bim/store.html", context)
 #
 # def search(request):
 #     query = request.GET.get('q', '')
@@ -255,7 +248,7 @@ class ContactUsView(TemplateView):
 #
 #     # Pass only 'page_obj' to the template for paginated results
 #     context = {'Project': project ,'page_obj': page_obj}
-#     return render(request, 'BIM/projects.html', context)
+#     return render(request, 'bim/projects.html', context)
 #
 # def coworkings(request):
 #     coworking = BIMCoworking.objects.prefetch_related('images', 'category')
@@ -269,7 +262,7 @@ class ContactUsView(TemplateView):
 #
 #     # Pass only 'page_obj' to the template for paginated results
 #     context = {'Coworking': coworking ,'page_obj': page_obj}
-#     return render(request, 'BIM/coworkings.html', context)
+#     return render(request, 'bim/coworkings.html', context)
 #
 # def mentoring(request):
 #     project = BIMProject.objects.prefetch_related('images')

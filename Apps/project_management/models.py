@@ -5,9 +5,11 @@ from django.utils.text import slugify
 from ckeditor.fields import RichTextField
 from django.urls import reverse
 
+
 class BaseModelManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().filter(deleted=False)
+
 
 class BaseModel(models.Model):
     deleted = models.BooleanField(default=False, editable=True)

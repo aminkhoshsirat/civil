@@ -9,6 +9,12 @@ class BaseModelManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().filter(deleted=False)
 
+
+class BimBannerModel(models.Model):
+    title = models.CharField(max_length=1000)
+    image = models.ImageField(upload_to='banners/')
+
+
 class BaseModel(models.Model):
     deleted = models.BooleanField(default=False, editable=True)
     created_at = models.DateTimeField(auto_now_add=True)

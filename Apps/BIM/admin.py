@@ -1,5 +1,10 @@
 from django.contrib import admin
-from .models import BIMProject, BIMProjectImage, BIMCoworking, BIMCoworkingImage, BIMCategory, BIMLateralSys, BIMGravitySys
+from .models import *
+
+@admin.register(BimBannerModel)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ['id', 'title']
+    search_fields = ['title']
 
 
 class CategoryAdmin(admin.ModelAdmin):

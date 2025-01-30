@@ -11,7 +11,7 @@ from django.views.generic.list import ListView
 # def index(request):
 #     project = STRProject.objects.prefetch_related('images')  # Adjust 'images' to the related_name for Project images
 #     coworking = STRCoworking.objects.prefetch_related('images', 'category')  # Prefetch images and category for Coworking
-#     return render(request, "Structure_Design/index.html", {'Project': project, 'Coworking': coworking})
+#     return render(request, "Structure_Design/index2.html", {'Project': project, 'Coworking': coworking})
 
 
 class IndexView(TemplateView):
