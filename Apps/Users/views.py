@@ -1,123 +1,152 @@
-from .models import UserProject, UserCoworking, UserCategory
-from django.shortcuts import render, get_object_or_404, redirect, reverse
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.http import JsonResponse
-from django.db.models import Q
+import json
+from django.shortcuts import HttpResponse
+from django.contrib import messages
+from django.contrib.auth import login, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import render, redirect
+from django.views.generic import View, TemplateView, ListView, DetailView
+from .forms import *
+import random
+from utils.services import send_otp
+from django.utils.timezone import now, timedelta
 
 
-def index(request):
-    project = UserProject.objects.prefetch_related('images')  # Adjust 'images' to the related_name for Project images
-    coworking = UserCoworking.objects.prefetch_related('images', 'category')  # Prefetch images and category for Coworking
-    return render(request, "index.html", {'Project': project, 'Coworking': coworking})
 
-def detail(request, id:int, title:str):
-    project = get_object_or_404(UserProject.objects.prefetch_related('images'),id=id)
-    related_projects = UserProject.objects.filter(category=project.category).exclude(id=project.id)[:4]
+class UserLoginView(View):
+    def post(self, request):
+        form = UserLoginForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            phone = cd['phone']
+            user = UserModel.objects.filter(phone=phone).first()
+            if user:
+                time.sleep(2)
+                check_password = user.check_password(cd['password'])
+                if check_password:
+                    login(request, user)
+                    return redirect('index')
+                else:
+                    messages.add_message(request, messages.ERROR, 'شماره یا رمز عبور اشتباه است')
+                    return redirect(request.META['HTTP_REFERER'])
+            else:
+                messages.add_message(request, messages.ERROR, 'شماره یا رمز عبور اشتباه است')
+                return redirect(request.META['HTTP_REFERER'])
+        else:
+            messages.add_message(request, messages.ERROR, form.errors)
+            return redirect(request.META['HTTP_REFERER'])
 
-    context = {'Project' : project, 'related_projects': related_projects}
-    return render(request,"detail.html", context)
 
-def coworking_detail(request, id: int, title: str):
-    coworking = get_object_or_404(UserCoworking.objects.prefetch_related('images'), id=id, slug=title)
-    related_coworkings = UserCoworking.objects.filter(category=coworking.category).exclude(id=coworking.id)[:4]
+class UserRegisterView(View):
+    def post(self, request):
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            phone = cd['phone']
+            user = UserModel.objects.filter(phone=phone).first()
+            if user:
+                if user.ban:
+                    return HttpResponse('کاربر ازسایت محروم شده است')
+                return HttpResponse('کاربر وجود دارد')
 
-    context = {'Coworking' : coworking, 'related_coworkings': related_coworkings}
-    return render(request,"coworkings_detail.html", context)
+            else:
+                otp = OtpModel.objects.filter(phone=cd['phone']).first()
+                if otp:
+                    if otp.date + timedelta(minutes=2) < now():
+                        code = random.randint(100000, 999999)
+                        otp.code = code
+                        otp.date = now()
+                        send_otp(phone, code)
+                        otp.save()
+                else:
+                    code = random.randint(100000, 999999)
+                    OtpModel.objects.create(phone=phone, code=code)
+                    send_otp(phone, code)
+                return HttpResponse('ok')
+        return render(request, 'user/form-errors.html', {'form': form})
 
-def store(request):
-    # Fetch categories from the database
-    categories = UserCategory.objects.all()
 
-    # Get selected categories, floor system, and other filters
-    selected_categories = request.GET.getlist('category')
-    min_area = request.GET.get('min_area')
-    max_area = request.GET.get('max_area')
+class UserRegisterActivationView(View):
+    def post(self, request):
+        form = UserRegisterActivationForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            code = cd['code']
+            phone = cd['phone']
+            sending_code = OtpModel.objects.filter(phone=phone).first()
+            if sending_code and sending_code.date + timedelta(minutes=10) > now():
+                if str(sending_code.code) == str(code):
+                    user = UserModel.objects.create_user(fullname=cd['fullname'], phone=phone,
+                                                         password=cd['password'])
+                    sending_code.delete()
+                    login(request, user)
+                    return HttpResponse('ok')
+                else:
+                    return HttpResponse('کد نادرست')
+            return HttpResponse('نامعتبر')
+        return render(request, 'user/form-errors.html', {'errors': form.errors})
 
-    # Base query for projects
-    project_query = UserProject.objects.all()
 
-    # Filter by selected categories
-    if selected_categories:
-        project_query = project_query.filter(category__title__in=selected_categories)
+class UserLogoutView(LoginRequiredMixin, View):
+    def get(self, request):
+        logout(request)
+        return redirect('index')
 
-    # Filter by total area
-    if min_area:
-        project_query = project_query.filter(total_Area__gte=min_area)
-    if max_area:
-        project_query = project_query.filter(total_Area__lte=max_area)
 
-    # Paginate results (6 items per page)
-    paginator = Paginator(project_query, 6)
-    page = request.GET.get('page')
+class SendOtpCodeView(View):
+    def post(self, request):
+        form = SendOtpForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            phone = cd['phone']
+            user = UserModel.objects.filter(phone=phone).first()
+            if user:
+                if user.ban:
+                    messages.add_message(request, messages.ERROR, 'کاربر ازسایت محروم شده است')
+                    return HttpResponse('کاربر ازسایت محروم شده است')
+                else:
+                    otp = OtpModel.objects.filter(phone=cd['phone']).first()
+                    if otp:
+                        if otp.date + timedelta(minutes=2) < now():
+                            code = random.randint(100000, 999999)
+                            otp.code = code
+                            otp.date = now()
+                            send_otp(phone, code)
+                            otp.save()
+                    else:
+                        code = random.randint(100000, 999999)
+                        OtpModel.objects.create(phone=phone, code=code)
+                        send_otp(phone, code)
+                    return HttpResponse('ok')
 
-    try:
-        projects = paginator.page(page)
-    except PageNotAnInteger:
-        projects = paginator.page(1)
-    except EmptyPage:
-        projects = paginator.page(paginator.num_pages)
+            else:
+                return HttpResponse('کاربر وجود ندارد')
 
-    # Build query string for pagination links
-    query_params = request.GET.copy()
-    if 'page' in query_params:
-        query_params.pop('page')
+        return render(request, 'user/form-errors.html', {'form': form})
 
-    context = {
-        'Project': projects,
-        'page_obj': projects,
-        'categories': categories,
-        'selected_categories': selected_categories,
-        'query_string': query_params.urlencode(),  # Pass the query string to the template
-    }
-    return render(request, "store.html", context)
 
-def search(request):
-    query = request.GET.get('q', '')
-    projects = UserProject.objects.filter(
-        Q(title__icontains=query) |
-        Q(category__title__icontains=query) |
-        Q(content__icontains=query)
-    ).distinct() if query else UserProject.objects.none()
+class PasswordForgetView(View):
+    def get(self, request):
+        return render(request, 'user/forget.html')
 
-    # Paginate results
-    paginator = Paginator(projects, 9)  # 9 projects per page
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-
-    return render(request, 'search.html', {'projects': page_obj, 'query': query})
-
-def projects(request):
-    project = UserProject.objects.prefetch_related('images')
-    # Filter projects containing 'پروژه شاخص' in the content field
-    featured_projects = UserProject.objects.filter(content__icontains='پروژه شاخص')
-
-    # Paginate the filtered projects
-    paginator = Paginator(featured_projects, 3)  # Show 3 projects per page
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-
-    # Pass only 'page_obj' to the template for paginated results
-    context = {'Project': project ,'page_obj': page_obj}
-    return render(request, 'projects.html', context)
-
-def coworkings(request):
-    coworking = UserCoworking.objects.prefetch_related('images', 'category')
-    # Filter projects containing 'پروژه شاخص' in the content field
-    featured_coworking = UserCoworking.objects.filter(content__icontains='پروژه شاخص')
-
-    # Paginate the filtered projects
-    paginator = Paginator(featured_coworking, 3)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-
-    # Pass only 'page_obj' to the template for paginated results
-    context = {'Coworking': coworking ,'page_obj': page_obj}
-    return render(request, 'coworkings.html', context)
-
-def mentoring(request):
-    project = UserProject.objects.prefetch_related('images')
-    coworking = UserCoworking.objects.prefetch_related('images', 'category')
-    return render(request, "mentoring.html", {'Project': project, 'Coworking': coworking})
-
-def contact_us(request):
-    return render(request, "contact_us.html")
+    def post(self, request):
+        form = ForgetForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            phone = cd['phone']
+            code = cd['code']
+            user = UserModel.objects.filter(phone=phone).first()
+            if user:
+                if user.ban:
+                    return HttpResponse('کاربر ازسایت محروم شده است')
+                else:
+                    sending_code = OtpModel.objects.filter(phone=phone).first()
+                    if sending_code and sending_code.date + timedelta(minutes=10) > now():
+                        if str(sending_code.code) == str(code):
+                            sending_code.delete()
+                            login(request, user)
+                            return HttpResponse('ok')
+                        else:
+                            return HttpResponse('کد نادرست')
+                    return HttpResponse('کد نادرست است')
+            return HttpResponse('کاربر وجود ندارد')
+        return HttpResponse('نامعتبر')

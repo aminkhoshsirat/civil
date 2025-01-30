@@ -19,6 +19,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # LOCAL APPS
     'structure',
     'Apps.Home_Page',
     'Apps.Structure_Design',
@@ -27,8 +29,14 @@ INSTALLED_APPS = [
     'Apps.Retrofit',
     'Apps.Software',
     'Apps.Users',
+
+    # EXTERNAL APPS
     'ckeditor',
+    'django_render_partial',
+    'django_jalali',
 ]
+
+AUTH_USER_MODEL = 'Users.UserModel'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -98,7 +106,7 @@ STORAGES = {
   },
 }
 
-
+# LIARA CONFIG
 AWS_ACCESS_KEY_ID = 's7mtd3ecb1safiaq'
 AWS_SECRET_ACCESS_KEY = '50dfce50-11b3-45a6-a8ec-4029430c8ae5'
 AWS_STORAGE_BUCKET_NAME = 'akurtek'

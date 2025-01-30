@@ -1,92 +1,60 @@
-from django.conf import settings
-from django.contrib.auth.models import User
+import random
+from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
+from django.contrib.auth.models import PermissionsMixin
+from django_jalali.db import models as jmodels
+from django.utils.translation import gettext_lazy as _
 from django.db import models
-from django.utils.text import slugify
-from ckeditor.fields import RichTextField
-
-class BaseModelManager(models.Manager):
-    def get_queryset(self):
-        return super().get_queryset().filter(deleted=False)
-
-class BaseModel(models.Model):
-    deleted = models.BooleanField(default=False, editable=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+from django.core.validators import MinLengthValidator
 
 
-    objects = BaseModelManager()
+class CustomUserManager(BaseUserManager):
+    """
+    Custom user model manager where email is the unique identifiers
+    for authentication instead of usernames.
+    """
+    def create_user(self, phone, email, fullname, password, **extra_fields):
+        """
+        Create and save a user with the given email and password.
+        """
+        if not phone:
+            raise ValueError(_("The phone must be set"))
+        email = self.normalize_email(email)
+        user = self.model(phone=phone,  email=email, fullname=fullname, **extra_fields)
+        user.set_password(password)
+        user.save()
+        return user
 
-    class Meta:
-        abstract = True
+    def create_superuser(self, phone, email, fullname, password, **extra_fields):
+        """
+        Create and save a SuperUser with the given email and password.
+        """
+        extra_fields.setdefault("is_staff", True)
+        extra_fields.setdefault("is_superuser", True)
+        extra_fields.setdefault("is_admin", True)
 
-    def delete(self, using=None, keep_parents=False):
-        self.deleted = True
-        self.save()
+        if extra_fields.get("is_staff") is not True:
+            raise ValueError(_("Superuser must have is_staff=True."))
+        if extra_fields.get("is_superuser") is not True:
+            raise ValueError(_("Superuser must have is_superuser=True."))
+        return self.create_user(phone, email, fullname, password, **extra_fields)
 
-# Create your models here.
-class UserCategory(BaseModel):
-    title = models.CharField(max_length=100)
 
-    def __str__(self):
-        return self.title
+class UserModel(PermissionsMixin, AbstractBaseUser):
+    phone = models.CharField(max_length=11, unique=True)
+    email = models.EmailField(_("email address"), blank=True, null=True, unique=True)
+    ban = models.BooleanField(default=False)
+    profile_image = models.ImageField('user/profiles', blank=True, null=True)
+    register_date = jmodels.jDateTimeField(auto_now_add=True)
+    fullname = models.CharField(max_length=150, default='No Name')
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=False)
+    last_login = models.DateTimeField(auto_now=True)
 
-class UserProject(BaseModel):
-    title = models.CharField(max_length=100)
-    slug = models.SlugField(unique=False, null=True, blank=True)
-    content = RichTextField()
-    illustration = models.TextField(null=True, blank=True)
-    characteristic = models.TextField(null=True, blank=True)
-    employer_opinion = models.TextField(null=True, blank=True)
-    image = models.ImageField(upload_to='image/project')
-    category = models.ForeignKey(UserCategory, on_delete=models.SET_NULL, null=True, blank=True)
-    total_Area = models.FloatField(null=True, blank=True)
+    USERNAME_FIELD = "phone"
+    REQUIRED_FIELDS = ["email", 'fullname']
 
-    def __str__(self):
-        return self.title
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.title)
-        super().save(*args, **kwargs)
-
-    def get_absolute_url(self):
-        from django.urls import reverse
-        return reverse("Structure_Design:detail", kwargs={"id": self.id, "title": self.slug})
-
-class UserProjectImage(models.Model):
-    project = models.ForeignKey(UserProject, related_name='images', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='project_images/')
-    caption = models.CharField(max_length=200, blank=True, null=True)
+    objects = CustomUserManager()
 
     def __str__(self):
-        return f"Image for {self.project.title}"
-
-class UserCoworking(BaseModel):
-    title = models.CharField(max_length=100)
-    slug = models.SlugField(unique=False, null=True, blank=True)
-    content = RichTextField()
-    illustration = models.TextField(null=True, blank=True)
-    characteristic = models.TextField(null=True, blank=True)
-    coworker_opinion = models.TextField(null=True, blank=True)
-    image = models.ImageField(upload_to='image/coworking')
-    category = models.ForeignKey(UserCategory, on_delete=models.SET_NULL, null=True, blank=True)
-
-    def __str__(self):
-        return self.title
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.title)
-        super().save(*args, **kwargs)
-
-    def get_absolute_url(self):
-        from django.urls import reverse
-        return reverse("Structure_Design:coworking_detail", kwargs={"id": self.id, "title": self.slug})
-
-class UserCoworkingImage(models.Model):
-    coworking = models.ForeignKey(UserCoworking, related_name='images', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='coworking_images/')
-    caption = models.CharField(max_length=200, blank=True, null=True)
-
-    def __str__(self):
-        return f"Image for {self.coworking.title}"
+        return f'{self.phone} - {self.fullname}'
