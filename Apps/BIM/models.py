@@ -10,9 +10,21 @@ class BaseModelManager(models.Manager):
         return super().get_queryset().filter(deleted=False)
 
 
-class BimBannerModel(models.Model):
+class BimPanelModel(models.Model):
     title = models.CharField(max_length=1000)
-    image = models.ImageField(upload_to='banners/')
+    image = models.ImageField(upload_to='bim/banner')
+    image_title = models.CharField(max_length=1000)
+    description = models.TextField()
+    mini_title1 = models.CharField(max_length=1000)
+    mini_title2 = models.CharField(max_length=1000)
+    mini_title3 = models.CharField(max_length=1000)
+    mini_description1 = models.TextField()
+    mini_description2 = models.TextField()
+    mini_description3 = models.TextField()
+    slider1_description = models.TextField()
+    slider2_description = models.TextField()
+    slider3_description = models.TextField()
+    project_base_title = models.CharField(max_length=1000)
 
 
 class BaseModel(models.Model):
@@ -33,6 +45,7 @@ class BaseModel(models.Model):
 # Create your models here.
 class BIMCategory(BaseModel):
     title = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='bim/category')
 
     def __str__(self):
         return self.title
@@ -110,3 +123,9 @@ class BIMCoworkingImage(models.Model):
 
     def __str__(self):
         return f"Image for {self.coworking.title}"
+
+
+class BIMTraining(BaseModel):
+    title = models.CharField(max_length=100)
+    link = models.URLField()
+    image = models.ImageField(upload_to='training_images/')

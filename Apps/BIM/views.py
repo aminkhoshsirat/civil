@@ -14,10 +14,12 @@ class IndexView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['BIMProject'] = BIMProject.objects.all()
-        context['banners'] = BimBannerModel.objects.all()
+        context['projects'] = BIMProject.objects.all()
+        context['banner'] = BimPanelModel.objects.first()
+        context['categories'] = BIMCategory.objects.all()
         # Fetch coworking projects and include category
-        context['Coworking'] = BIMCoworking.objects.select_related('category')
+        context['coworking'] = BIMCoworking.objects.all()
+        context['trainings'] = BIMTraining.objects.all()
         return context
 
 

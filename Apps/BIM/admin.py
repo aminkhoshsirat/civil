@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import *
 
-@admin.register(BimBannerModel)
+@admin.register(BimPanelModel)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['id', 'title']
     search_fields = ['title']
